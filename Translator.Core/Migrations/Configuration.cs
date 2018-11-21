@@ -62,6 +62,35 @@ namespace Translator.Core.Migrations
 
                 context.SaveChanges();
             }
+            
+            if(context.Field.Count() == 0)
+            {
+                context.Field.Add(new Field { Name = "JP" });
+                context.Field.Add(new Field { Name = "VN" });
+                context.Field.Add(new Field { Name = "JPLen" });
+                context.Field.Add(new Field { Name = "VNLen" });
+                context.Field.Add(new Field { Name = "Category" });
+                context.Field.Add(new Field { Name = "priority" });
+                context.Field.Add(new Field { Name = "type" });
+                context.Field.Add(new Field { Name = "dictionary_type" });
+                context.Field.Add(new Field { Name = "date" });
+                context.Field.Add(new Field { Name = "inputer" });
+
+                context.SaveChanges();
+            }
+
+            if(context.Category.Count() == 0)
+            {
+                context.Category.Add(new Category { Name = "Common"});
+                context.Category.Add(new Category { Name = "Kanji" });
+                context.SaveChanges();
+            }
+
+            if(context.Type.Count() == 0)
+            {
+                context.Type.Add(new Models.Type { Name = "JP -> VN" });
+                context.Type.Add(new Models.Type { Name = "VN -> JP" });
+            }
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
