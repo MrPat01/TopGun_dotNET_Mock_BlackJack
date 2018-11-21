@@ -9,5 +9,8 @@ namespace Translator.Core.IServices
 {
     public interface IDictionaryService : IRepository<Dictionary>
     {
+        Dictionary TranslateVN2JP(string Input);
+        Dictionary TranslateJP2VN(string Input);
+        Dictionary Translate(string Input, int type);
     }
 }
