@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Translator.Client
 {
-    public partial class Form1 : Form
+    public partial class Client : Form
     {
-        public Form1()
+        public Client()
         {
             InitializeComponent();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
