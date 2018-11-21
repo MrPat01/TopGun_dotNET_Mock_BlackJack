@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Translator.Core/obj
+/Translator.Server/obj
+/Translator.Client/obj
+/Translator.Admin/obj
+/Translator/obj
+/packages/EPPlus.4.5.2.1
+/.vs
