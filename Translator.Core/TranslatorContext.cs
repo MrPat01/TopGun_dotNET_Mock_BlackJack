@@ -23,6 +23,13 @@ namespace Translator.Core
 
         // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public virtual DbSet<ConfigPath> ConfigPath { get; set; }
+        public virtual DbSet<Dictionary> Dictionary { get; set; }
+        public virtual DbSet<Field> Field { get; set; }
+        public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Models.Type> Type { get; set; }
+        
+
+
     }
 
     //public class MyEntity
