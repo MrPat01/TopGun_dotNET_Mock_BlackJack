@@ -11,11 +11,11 @@ namespace Translator.Core.Services
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly DbContext _dbContext = new TranslatorContext();
-        //public Repository(DbContext dbContext)
-        //{
-        //    _dbContext = dbContext;
-        //}
+        private readonly TranslatorContext _dbContext = new TranslatorContext();
+        public Repository(TranslatorContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public T AddNew(T entity)
         {
             entity.InsertedAt = DateTime.Now;

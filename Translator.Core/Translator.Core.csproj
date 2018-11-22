@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="Common\Utility.cs" />
     <Compile Include="Filter\DictionaryFilter.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="IRepository.cs" />

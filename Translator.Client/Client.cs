@@ -15,11 +15,11 @@ namespace Translator.Client
     public partial class Client : Form
     {
         private readonly Core.IServices.IDictionaryService _dictionaryService;
-        private readonly Core.IServices.ITypeService _TypeService;
-        public Client()
+        private readonly Core.IServices.ITypeService _typeService;
+        public Client(Core.IServices.IDictionaryService dictionaryService, Core.IServices.ITypeService typeService)
         {
-            //_dictionaryService = dictionaryService;
-            //_TypeService = TypeService;
+            _dictionaryService = dictionaryService;
+            _typeService = typeService;
             InitializeComponent();
         }
 
@@ -69,11 +69,11 @@ namespace Translator.Client
         {
             string path = txt_FilePath.Text;
             int type = (int)cbb_type.SelectedValue;
-            if(path.IndexOf(".txt") != -1)
+            if (path.IndexOf(".txt") != -1)
             {
                 translateTxt(path, type);
             }
-            else if(path.IndexOf(".xlsx") != -1)
+            else if (path.IndexOf(".xlsx") != -1)
             {
                 string newPath = path.Replace(".xlsx", "_JP.xlsx");
             }
@@ -82,11 +82,11 @@ namespace Translator.Client
                 string newPath = path.Replace(".xls", "_JP.xls");
             }
 
-            
+
         }
         public void translateTxt(string filePath, int type)
         {
-            if(type == (int)TranslateType.Vn2Jp)
+            if (type == (int)TranslateType.Vn2Jp)
             {
                 string newPath = filePath.Replace(".txt", "_JP.txt");
                 string readText = File.ReadAllText(filePath);
@@ -106,11 +106,11 @@ namespace Translator.Client
 
                     if (item.IndexOf("\n") > 0)
                     {
-                        createText += Environment.NewLine + text;
+                        createText += Environment.NewLine + _dictionaryService.TranslateVN2JP(text).JP;
                     }
                     else
                     {
-                        createText += text;
+                        createText += _dictionaryService.TranslateVN2JP(text).JP;
                     }
                 }
 
@@ -136,11 +136,11 @@ namespace Translator.Client
 
                     if (item.IndexOf("\n") > 0)
                     {
-                        createText += Environment.NewLine + text;
+                        createText += Environment.NewLine + _dictionaryService.TranslateVN2JP(text).VN;
                     }
                     else
                     {
-                        createText += text;
+                        createText += _dictionaryService.TranslateVN2JP(text).VN;
                     }
                 }
 
