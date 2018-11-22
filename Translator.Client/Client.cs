@@ -21,5 +21,10 @@ namespace Translator.Client
         {
 
         }
+
+        private void Client_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
