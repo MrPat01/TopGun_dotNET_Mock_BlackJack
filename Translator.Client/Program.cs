@@ -18,8 +18,8 @@ namespace Translator.Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(container.GetInstance<Client>());
-            //Application.Run(new Client());
+            //Application.Run(container.GetInstance<Client>());
+            Application.Run(new Client());
         }
 
         private static void Bootstrap()
