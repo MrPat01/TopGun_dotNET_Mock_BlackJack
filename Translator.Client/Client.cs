@@ -14,11 +14,11 @@ namespace Translator.Client
     public partial class Client : Form
     {
         private readonly Core.IServices.IDictionaryService _dictionaryService;
-        private readonly Core.IServices.ITypeService _TypeService;
-        public Client()
+        private readonly Core.IServices.ITypeService _typeService;
+        public Client(Core.IServices.IDictionaryService dictionaryService, Core.IServices.ITypeService typeService)
         {
-            //_dictionaryService = dictionaryService;
-            //_TypeService = TypeService;
+            _dictionaryService = dictionaryService;
+            _typeService = typeService;
             InitializeComponent();
         }
 

@@ -12,9 +12,9 @@ namespace Translator.Core.Services
 {
     public class DictionaryService : Repository<Dictionary>, Translator.Core.IServices.IDictionaryService
     {
-        //public DictionaryService(DbContext dbContext) : base(dbContext)
-        //{
-        //}
+        public DictionaryService(TranslatorContext dbContext) : base(dbContext)
+        {
+        }
         public Dictionary Muti_Condition(List<DictionaryFilter> filter)
         {
             var query = GetAll();

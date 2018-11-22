@@ -4,7 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SimpleInjector;
+using Translator.Core;
 using Translator.Core.Common;
+using Translator.Core.IServices;
+using Translator.Core.Services;
 
 namespace Translator.Client
 {
@@ -19,6 +22,7 @@ namespace Translator.Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Bootstrap();
             Application.Run(container.GetInstance<Client>());
             //Application.Run(new Client());
         }
@@ -29,9 +33,10 @@ namespace Translator.Client
             container = new Container();
 
             // Register your types, for instance:
-            //container.Register<IUserRepository, SqlUserRepository>(Lifestyle.Singleton);
-            //container.Register<IUserContext, WinFormsUserContext>();
-            container.Register<Client>();
+            container.Register<TranslatorContext>(Lifestyle.Singleton);
+            container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
+            container.Register<ITypeService, TypeService>(Lifestyle.Singleton);
+            container.Register<Client>(Lifestyle.Singleton);
 
             // Optionally verify the container.
             container.Verify();

@@ -9,3 +9,4 @@
 /Translator/obj
 /packages
 /.vs
+**/bin
