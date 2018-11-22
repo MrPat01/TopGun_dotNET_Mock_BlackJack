@@ -1,0 +1,3 @@
+Enable-Migrations -ProjectName Translator.Core -StartUpProjectName Translator.Core
+Add-Migration Core -ProjectName Translator.Core -StartUpProjectName Translator.Core
+Update-Database -ProjectName Translator.Core -StartUpProjectName Translator.Core
