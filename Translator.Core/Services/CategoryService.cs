@@ -11,8 +11,8 @@ namespace Translator.Core.Services
 {
     public class CategoryService : Repository<Category>, ICategoryService
     {
-        public CategoryService(DbContext dbContext) : base(dbContext)
-        {
-        }
+        //public CategoryService(DbContext dbContext) : base(dbContext)
+        //{
+        //}
     }
 }

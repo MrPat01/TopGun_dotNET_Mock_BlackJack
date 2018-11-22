@@ -11,8 +11,8 @@ namespace Translator.Core.Services
 {
     public class ConfigPathService : Repository<ConfigPath>,IConfigPathService
     {
-        public ConfigPathService(DbContext dbContext) : base(dbContext)
-        {
-        }
+        //public ConfigPathService(DbContext dbContext) : base(dbContext)
+        //{
+        //}
     }
 }

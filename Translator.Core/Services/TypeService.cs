@@ -10,8 +10,8 @@ namespace Translator.Core.Services
 {
     public class TypeService : Repository<Models.Type>, ITypeService
     {
-        public TypeService(DbContext dbContext) : base(dbContext)
-        {
-        }
+        //public TypeService(DbContext dbContext) : base(dbContext)
+        //{
+        //}
     }
 }
