@@ -8,6 +8,5 @@ namespace Translator.Core.Models
 {
     public class Field : BaseEntity
     {
-        public string Name { get; set; }
     }
 }
