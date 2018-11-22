@@ -15,8 +15,13 @@ namespace Translator.Core
         // 
         // If you wish to target a different database and/or database provider, modify the 'TranslatorContext' 
         // connection string in the application configuration file.
+        //public TranslatorContext()
+        //    : base(Utility.GetConnectionString())
+        //{
+
+        //}
         public TranslatorContext()
-            : base(Utility.GetConnectionString())
+            : base("name=TranslatorContext")
         {
         }
 
