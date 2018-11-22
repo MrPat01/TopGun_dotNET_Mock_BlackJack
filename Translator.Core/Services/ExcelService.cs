@@ -40,7 +40,10 @@ namespace Translator.Core.Services
                     {
                         for (int r = 1; r <= currentSheet.Dimension.End.Row; r++)
                         {
-                            currentSheet.Cells[r, c].Value = TranslateText(currentSheet.Cells[r, c].Value.ToString(), type);
+                            if (currentSheet.Cells[r, c].Value != null)
+                            {
+                                currentSheet.Cells[r, c].Value = TranslateText(currentSheet.Cells[r, c].Value.ToString(), type);
+                            }
                         }
                     }
                 }
