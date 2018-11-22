@@ -69,21 +69,23 @@ namespace Translator.Client
         {
             string path = txt_FilePath.Text;
             int type = (int)cbb_type.SelectedValue;
-            if (path.IndexOf(".txt") != -1)
+            if (!string.IsNullOrWhiteSpace(path))
             {
-                translateTxt(path, type);
+                if (path.IndexOf(".txt") != -1)
+                {
+                    translateTxt(path, type);
+                }
+                else if (path.IndexOf(".xlsx") != -1)
+                {
+                    string newPath = path.Replace(".xlsx", "_JP.xlsx");
+                }
+                else
+                {
+                    string newPath = path.Replace(".xls", "_JP.xls");
+                }
             }
-            else if (path.IndexOf(".xlsx") != -1)
-            {
-                string newPath = path.Replace(".xlsx", "_JP.xlsx");
-            }
-            else
-            {
-                string newPath = path.Replace(".xls", "_JP.xls");
-            }
-
-
         }
+
         public void translateTxt(string filePath, int type)
         {
             if (type == (int)TranslateType.Vn2Jp)
