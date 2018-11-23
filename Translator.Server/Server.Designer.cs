@@ -33,34 +33,38 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.button9 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.btn_VN_Error = new System.Windows.Forms.Button();
+            this.btn_VN_Output = new System.Windows.Forms.Button();
+            this.txt_VN_Error = new System.Windows.Forms.TextBox();
+            this.txt_VN_Output = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.btn_VN_Backup = new System.Windows.Forms.Button();
+            this.btn_VN_Input = new System.Windows.Forms.Button();
+            this.txt_VN_Backup = new System.Windows.Forms.TextBox();
+            this.txt_VN_Input = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.btn_JP_Error = new System.Windows.Forms.Button();
+            this.btn_JP_Output = new System.Windows.Forms.Button();
+            this.txt_JP_Error = new System.Windows.Forms.TextBox();
+            this.txt_JP_Output = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btn_JP_BackUp = new System.Windows.Forms.Button();
+            this.btn_JP_Input = new System.Windows.Forms.Button();
+            this.txt_JP_BackUp = new System.Windows.Forms.TextBox();
+            this.txt_JP_Input = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -69,10 +73,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -127,16 +127,16 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.button5);
-            this.groupBox3.Controls.Add(this.button6);
-            this.groupBox3.Controls.Add(this.textBox3);
-            this.groupBox3.Controls.Add(this.textBox4);
+            this.groupBox3.Controls.Add(this.btn_VN_Error);
+            this.groupBox3.Controls.Add(this.btn_VN_Output);
+            this.groupBox3.Controls.Add(this.txt_VN_Error);
+            this.groupBox3.Controls.Add(this.txt_VN_Output);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.button7);
-            this.groupBox3.Controls.Add(this.button8);
-            this.groupBox3.Controls.Add(this.textBox7);
-            this.groupBox3.Controls.Add(this.textBox8);
+            this.groupBox3.Controls.Add(this.btn_VN_Backup);
+            this.groupBox3.Controls.Add(this.btn_VN_Input);
+            this.groupBox3.Controls.Add(this.txt_VN_Backup);
+            this.groupBox3.Controls.Add(this.txt_VN_Input);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Location = new System.Drawing.Point(243, 192);
@@ -146,37 +146,41 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Translate VN 2 JP";
             // 
-            // button5
+            // btn_VN_Error
             // 
-            this.button5.Location = new System.Drawing.Point(428, 105);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 11;
-            this.button5.Text = "Go";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btn_VN_Error.Location = new System.Drawing.Point(428, 105);
+            this.btn_VN_Error.Name = "btn_VN_Error";
+            this.btn_VN_Error.Size = new System.Drawing.Size(75, 23);
+            this.btn_VN_Error.TabIndex = 11;
+            this.btn_VN_Error.Text = "Go";
+            this.btn_VN_Error.UseVisualStyleBackColor = true;
+            this.btn_VN_Error.Click += new System.EventHandler(this.btn_VN_Error_Click);
             // 
-            // button6
+            // btn_VN_Output
             // 
-            this.button6.Location = new System.Drawing.Point(428, 76);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 10;
-            this.button6.Text = "Go";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btn_VN_Output.Location = new System.Drawing.Point(428, 76);
+            this.btn_VN_Output.Name = "btn_VN_Output";
+            this.btn_VN_Output.Size = new System.Drawing.Size(75, 23);
+            this.btn_VN_Output.TabIndex = 10;
+            this.btn_VN_Output.Text = "Go";
+            this.btn_VN_Output.UseVisualStyleBackColor = true;
+            this.btn_VN_Output.Click += new System.EventHandler(this.btn_VN_Output_Click);
             // 
-            // textBox3
+            // txt_VN_Error
             // 
-            this.textBox3.Location = new System.Drawing.Point(101, 107);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(321, 20);
-            this.textBox3.TabIndex = 9;
+            this.txt_VN_Error.Enabled = false;
+            this.txt_VN_Error.Location = new System.Drawing.Point(101, 107);
+            this.txt_VN_Error.Name = "txt_VN_Error";
+            this.txt_VN_Error.Size = new System.Drawing.Size(321, 20);
+            this.txt_VN_Error.TabIndex = 9;
             // 
-            // textBox4
+            // txt_VN_Output
             // 
-            this.textBox4.Location = new System.Drawing.Point(101, 78);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(321, 20);
-            this.textBox4.TabIndex = 8;
+            this.txt_VN_Output.Enabled = false;
+            this.txt_VN_Output.Location = new System.Drawing.Point(101, 78);
+            this.txt_VN_Output.Name = "txt_VN_Output";
+            this.txt_VN_Output.Size = new System.Drawing.Size(321, 20);
+            this.txt_VN_Output.TabIndex = 8;
             // 
             // label6
             // 
@@ -196,37 +200,41 @@
             this.label7.TabIndex = 6;
             this.label7.Text = "Output Folder:";
             // 
-            // button7
+            // btn_VN_Backup
             // 
-            this.button7.Location = new System.Drawing.Point(428, 47);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(75, 23);
-            this.button7.TabIndex = 5;
-            this.button7.Text = "Go";
-            this.button7.UseVisualStyleBackColor = true;
+            this.btn_VN_Backup.Location = new System.Drawing.Point(428, 47);
+            this.btn_VN_Backup.Name = "btn_VN_Backup";
+            this.btn_VN_Backup.Size = new System.Drawing.Size(75, 23);
+            this.btn_VN_Backup.TabIndex = 5;
+            this.btn_VN_Backup.Text = "Go";
+            this.btn_VN_Backup.UseVisualStyleBackColor = true;
+            this.btn_VN_Backup.Click += new System.EventHandler(this.btn_VN_Backup_Click);
             // 
-            // button8
+            // btn_VN_Input
             // 
-            this.button8.Location = new System.Drawing.Point(428, 18);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(75, 23);
-            this.button8.TabIndex = 4;
-            this.button8.Text = "Go";
-            this.button8.UseVisualStyleBackColor = true;
+            this.btn_VN_Input.Location = new System.Drawing.Point(428, 18);
+            this.btn_VN_Input.Name = "btn_VN_Input";
+            this.btn_VN_Input.Size = new System.Drawing.Size(75, 23);
+            this.btn_VN_Input.TabIndex = 4;
+            this.btn_VN_Input.Text = "Go";
+            this.btn_VN_Input.UseVisualStyleBackColor = true;
+            this.btn_VN_Input.Click += new System.EventHandler(this.btn_VN_Input_Click);
             // 
-            // textBox7
+            // txt_VN_Backup
             // 
-            this.textBox7.Location = new System.Drawing.Point(101, 49);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(321, 20);
-            this.textBox7.TabIndex = 3;
+            this.txt_VN_Backup.Enabled = false;
+            this.txt_VN_Backup.Location = new System.Drawing.Point(101, 49);
+            this.txt_VN_Backup.Name = "txt_VN_Backup";
+            this.txt_VN_Backup.Size = new System.Drawing.Size(321, 20);
+            this.txt_VN_Backup.TabIndex = 3;
             // 
-            // textBox8
+            // txt_VN_Input
             // 
-            this.textBox8.Location = new System.Drawing.Point(101, 19);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(321, 20);
-            this.textBox8.TabIndex = 2;
+            this.txt_VN_Input.Enabled = false;
+            this.txt_VN_Input.Location = new System.Drawing.Point(101, 19);
+            this.txt_VN_Input.Name = "txt_VN_Input";
+            this.txt_VN_Input.Size = new System.Drawing.Size(321, 20);
+            this.txt_VN_Input.TabIndex = 2;
             // 
             // label14
             // 
@@ -257,16 +265,16 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.button4);
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.textBox6);
-            this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.btn_JP_Error);
+            this.groupBox2.Controls.Add(this.btn_JP_Output);
+            this.groupBox2.Controls.Add(this.txt_JP_Error);
+            this.groupBox2.Controls.Add(this.txt_JP_Output);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.button2);
-            this.groupBox2.Controls.Add(this.button1);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.textBox1);
+            this.groupBox2.Controls.Add(this.btn_JP_BackUp);
+            this.groupBox2.Controls.Add(this.btn_JP_Input);
+            this.groupBox2.Controls.Add(this.txt_JP_BackUp);
+            this.groupBox2.Controls.Add(this.txt_JP_Input);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(243, 6);
@@ -277,37 +285,41 @@
             this.groupBox2.Text = "Translate JP 2 VN";
             this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // button4
+            // btn_JP_Error
             // 
-            this.button4.Location = new System.Drawing.Point(428, 105);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 11;
-            this.button4.Text = "Go";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btn_JP_Error.Location = new System.Drawing.Point(428, 105);
+            this.btn_JP_Error.Name = "btn_JP_Error";
+            this.btn_JP_Error.Size = new System.Drawing.Size(75, 23);
+            this.btn_JP_Error.TabIndex = 11;
+            this.btn_JP_Error.Text = "Go";
+            this.btn_JP_Error.UseVisualStyleBackColor = true;
+            this.btn_JP_Error.Click += new System.EventHandler(this.btn_JP_Error_Click);
             // 
-            // button3
+            // btn_JP_Output
             // 
-            this.button3.Location = new System.Drawing.Point(428, 76);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Go";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_JP_Output.Location = new System.Drawing.Point(428, 76);
+            this.btn_JP_Output.Name = "btn_JP_Output";
+            this.btn_JP_Output.Size = new System.Drawing.Size(75, 23);
+            this.btn_JP_Output.TabIndex = 10;
+            this.btn_JP_Output.Text = "Go";
+            this.btn_JP_Output.UseVisualStyleBackColor = true;
+            this.btn_JP_Output.Click += new System.EventHandler(this.btn_JP_Output_Click);
             // 
-            // textBox6
+            // txt_JP_Error
             // 
-            this.textBox6.Location = new System.Drawing.Point(101, 107);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(321, 20);
-            this.textBox6.TabIndex = 9;
+            this.txt_JP_Error.Enabled = false;
+            this.txt_JP_Error.Location = new System.Drawing.Point(101, 107);
+            this.txt_JP_Error.Name = "txt_JP_Error";
+            this.txt_JP_Error.Size = new System.Drawing.Size(321, 20);
+            this.txt_JP_Error.TabIndex = 9;
             // 
-            // textBox5
+            // txt_JP_Output
             // 
-            this.textBox5.Location = new System.Drawing.Point(101, 78);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(321, 20);
-            this.textBox5.TabIndex = 8;
+            this.txt_JP_Output.Enabled = false;
+            this.txt_JP_Output.Location = new System.Drawing.Point(101, 78);
+            this.txt_JP_Output.Name = "txt_JP_Output";
+            this.txt_JP_Output.Size = new System.Drawing.Size(321, 20);
+            this.txt_JP_Output.TabIndex = 8;
             // 
             // label3
             // 
@@ -327,37 +339,41 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Output Folder:";
             // 
-            // button2
+            // btn_JP_BackUp
             // 
-            this.button2.Location = new System.Drawing.Point(428, 47);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Go";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_JP_BackUp.Location = new System.Drawing.Point(428, 47);
+            this.btn_JP_BackUp.Name = "btn_JP_BackUp";
+            this.btn_JP_BackUp.Size = new System.Drawing.Size(75, 23);
+            this.btn_JP_BackUp.TabIndex = 5;
+            this.btn_JP_BackUp.Text = "Go";
+            this.btn_JP_BackUp.UseVisualStyleBackColor = true;
+            this.btn_JP_BackUp.Click += new System.EventHandler(this.btn_JP_BackUp_Click);
             // 
-            // button1
+            // btn_JP_Input
             // 
-            this.button1.Location = new System.Drawing.Point(428, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Go";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_JP_Input.Location = new System.Drawing.Point(428, 18);
+            this.btn_JP_Input.Name = "btn_JP_Input";
+            this.btn_JP_Input.Size = new System.Drawing.Size(75, 23);
+            this.btn_JP_Input.TabIndex = 4;
+            this.btn_JP_Input.Text = "Go";
+            this.btn_JP_Input.UseVisualStyleBackColor = true;
+            this.btn_JP_Input.Click += new System.EventHandler(this.btn_JP_Input_Click);
             // 
-            // textBox2
+            // txt_JP_BackUp
             // 
-            this.textBox2.Location = new System.Drawing.Point(101, 49);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(321, 20);
-            this.textBox2.TabIndex = 3;
+            this.txt_JP_BackUp.Enabled = false;
+            this.txt_JP_BackUp.Location = new System.Drawing.Point(101, 49);
+            this.txt_JP_BackUp.Name = "txt_JP_BackUp";
+            this.txt_JP_BackUp.Size = new System.Drawing.Size(321, 20);
+            this.txt_JP_BackUp.TabIndex = 3;
             // 
-            // textBox1
+            // txt_JP_Input
             // 
-            this.textBox1.Location = new System.Drawing.Point(101, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(321, 20);
-            this.textBox1.TabIndex = 2;
+            this.txt_JP_Input.Enabled = false;
+            this.txt_JP_Input.Location = new System.Drawing.Point(101, 19);
+            this.txt_JP_Input.Name = "txt_JP_Input";
+            this.txt_JP_Input.Size = new System.Drawing.Size(321, 20);
+            this.txt_JP_Input.TabIndex = 2;
             // 
             // label5
             // 
@@ -406,6 +422,42 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "About";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(117, 204);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(82, 13);
+            this.label19.TabIndex = 10;
+            this.label19.Text = "Boy Đóng Thuế";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(117, 177);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(68, 13);
+            this.label18.TabIndex = 9;
+            this.label18.Text = "Nhà Vô Địch";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(117, 150);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(79, 13);
+            this.label17.TabIndex = 8;
+            this.label17.Text = "Searching Man";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(117, 125);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(54, 13);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "Thủ Khoa";
             // 
             // label13
             // 
@@ -471,42 +523,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(117, 125);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(54, 13);
-            this.label16.TabIndex = 7;
-            this.label16.Text = "Thủ Khoa";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(117, 150);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(79, 13);
-            this.label17.TabIndex = 8;
-            this.label17.Text = "Searching Man";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(117, 177);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(68, 13);
-            this.label18.TabIndex = 9;
-            this.label18.Text = "Nhà Vô Địch";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(117, 204);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(82, 13);
-            this.label19.TabIndex = 10;
-            this.label19.Text = "Boy Đóng Thuế";
-            // 
             // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -516,8 +532,8 @@
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label1);
             this.Name = "Server";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Client_Load);
+            this.Text = "Server";
+            this.Load += new System.EventHandler(this.Server_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -539,10 +555,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
@@ -554,22 +566,10 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button button9;
@@ -577,6 +577,22 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
+        public System.Windows.Forms.TextBox txt_JP_Input;
+        public System.Windows.Forms.TextBox txt_JP_BackUp;
+        public System.Windows.Forms.TextBox txt_JP_Output;
+        public System.Windows.Forms.TextBox txt_VN_Input;
+        public System.Windows.Forms.TextBox txt_JP_Error;
+        public System.Windows.Forms.TextBox txt_VN_Backup;
+        public System.Windows.Forms.TextBox txt_VN_Output;
+        public System.Windows.Forms.TextBox txt_VN_Error;
+        public System.Windows.Forms.Button btn_JP_Input;
+        public System.Windows.Forms.Button btn_JP_BackUp;
+        public System.Windows.Forms.Button btn_JP_Output;
+        public System.Windows.Forms.Button btn_JP_Error;
+        public System.Windows.Forms.Button btn_VN_Input;
+        public System.Windows.Forms.Button btn_VN_Backup;
+        public System.Windows.Forms.Button btn_VN_Output;
+        public System.Windows.Forms.Button btn_VN_Error;
     }
 }
 

@@ -30,6 +30,11 @@ namespace Translator.Client
 
         private void Client_Load(object sender, EventArgs e)
         {
+            var type = _typeService.GetAll();
+            cbb_type.DataSource = type;
+            cbb_type.DisplayMember = "Name";
+            cbb_type.ValueMember = "Id";
+            cbb_type.SelectedValue = type.FirstOrDefault().Id;
         }
 
         private void btn_BrowseFile_Click(object sender, EventArgs e)
@@ -147,6 +152,30 @@ namespace Translator.Client
                 }
 
                 File.WriteAllText(newPath, createText, Encoding.UTF8);
+            }
+        }
+
+        private void btn_translateFolder_Click(object sender, EventArgs e)
+        {
+            string folderPath = txt_FolderPath.Text;
+            foreach (string path in Directory.EnumerateFiles(folderPath, "*.txt; *.xlsx; *.xls"))
+            {
+                int type = (int)cbb_type.SelectedValue;
+                if (!string.IsNullOrWhiteSpace(path))
+                {
+                    if (path.IndexOf(".txt") != -1)
+                    {
+                        translateTxt(path, type);
+                    }
+                    else if (path.IndexOf(".xlsx") != -1)
+                    {
+                        string newPath = path.Replace(".xlsx", "_JP.xlsx");
+                    }
+                    else
+                    {
+                        string newPath = path.Replace(".xls", "_JP.xls");
+                    }
+                }
             }
         }
     }
