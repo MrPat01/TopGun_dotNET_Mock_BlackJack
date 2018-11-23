@@ -58,9 +58,9 @@ namespace Translator.Core.Services
             switch (type)
             {
                 case TranslateType.Jp2Vn:
-                    return TranslateJP2VN(text).VN;
+                    return TranslateJP2VN(text)?.VN ?? text;
                 case TranslateType.Vn2Jp:
-                    return TranslateVN2JP(text).JP;
+                    return TranslateVN2JP(text)?.JP ?? text;
                 default:
                     return text;
             }

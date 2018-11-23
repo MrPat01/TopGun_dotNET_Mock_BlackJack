@@ -37,6 +37,7 @@ namespace Translator.Client
             container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
             container.Register<ITypeService, TypeService>(Lifestyle.Singleton);
             container.Register<IExcelService, ExcelService>(Lifestyle.Singleton);
+            container.Register<ITxtService, TxtService>(Lifestyle.Singleton);
             container.Register<Client>(Lifestyle.Singleton);
 
             // Optionally verify the container.

@@ -42,7 +42,7 @@ namespace Translator.Core.Services
                 }
                 else
                 {
-                    createText += _dictionaryService.TranslateVN2JP(text).JP;
+                    createText += _dictionaryService.TranslateText(text, type);
                 }
             }
 

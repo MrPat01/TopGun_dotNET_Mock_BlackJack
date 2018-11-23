@@ -35,7 +35,7 @@ namespace Translator.Client
 
         private void Client_Load(object sender, EventArgs e)
         {
-            var type = _typeService.GetAll();
+            var type = _typeService.GetAll().ToList();
             cbb_type.DataSource = type;
             cbb_type.DisplayMember = "Name";
             cbb_type.ValueMember = "Id";
@@ -97,20 +97,20 @@ namespace Translator.Client
 
         private void btn_translateFolder_Click(object sender, EventArgs e)
         {
-            int type = (int)cbb_type.SelectedValue;
+            var type = (TranslateType)cbb_type.SelectedValue;
             string path = txt_FolderPath.Text;
             var files = Directory.GetFiles(path);
             var excelFiles = files.Where(f => f.EndsWith(".xlsx"));
-            var txtFiles = files.Where(f => f.EndsWith(".xlsx"));
+            var txtFiles = files.Where(f => f.EndsWith(".txt"));
             foreach (var file in excelFiles)
             {
                 string newPath = file.Replace(".xlsx", "_JP.xlsx");
-                _excelService.Translate(file, newPath, (TranslateType) type);
+                _excelService.Translate(file, newPath,  type);
             }
             foreach (var file in txtFiles)
             {
-                string newPath = path.Replace(".xlsx", "_JP.xlsx");
-                _txtService.Translate(path, newPath, (TranslateType) type);
+                string newPath = file.Replace(".txt", "_JP.txt");
+                _txtService.Translate(file, newPath, type);
             }
         }
 
