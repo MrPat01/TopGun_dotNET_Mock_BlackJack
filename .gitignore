@@ -10,3 +10,4 @@
 /packages
 /.vs
 **/bin
+/Translator.Core/Translator.Core.csproj.user

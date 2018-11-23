@@ -13,6 +13,6 @@ namespace Translator.Core.IServices
         Dictionary TranslateVN2JP(string Input);
         Dictionary TranslateJP2VN(string Input);
         Dictionary Translate(string Input, int type);
-        string TranslateText(string text, TranslateType type)
+        string TranslateText(string text, TranslateType type);
     }
 }
