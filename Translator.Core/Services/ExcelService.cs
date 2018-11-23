@@ -6,19 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using OfficeOpenXml;
 using Translator.Core.Common;
+using Translator.Core.IServices;
 
 namespace Translator.Core.Services
 {
-    public class ExcelService
+    public class ExcelService:IExcelService
     {
-        private string TranslateText(string text, TranslateType type)
-        {
-            return String.Empty;
-        }
+        private readonly IDictionaryService _dictionaryService;
 
-        private void Statistic(long wordCount, long pageCount)
+        public ExcelService(IDictionaryService dictionaryService)
         {
-            return;
+            _dictionaryService = dictionaryService;
         }
 
         public void Translate(string inputPath, string outputPath, TranslateType type)
@@ -33,7 +31,7 @@ namespace Translator.Core.Services
                     var currentSheet = listSheet[i];
 
                     //Translate sheet name
-                    currentSheet.Name = TranslateText(currentSheet.Name, type);
+                    currentSheet.Name = _dictionaryService.TranslateText(currentSheet.Name, type);
 
                     //Translate each cell
                     for (int c = 1; c <= currentSheet.Dimension.End.Column; c++)
@@ -42,7 +40,7 @@ namespace Translator.Core.Services
                         {
                             if (currentSheet.Cells[r, c].Value != null)
                             {
-                                currentSheet.Cells[r, c].Value = TranslateText(currentSheet.Cells[r, c].Value.ToString(), type);
+                                currentSheet.Cells[r, c].Value = _dictionaryService.TranslateText(currentSheet.Cells[r, c].Value.ToString(), type);
                             }
                         }
                     }

@@ -201,6 +201,7 @@
             this.btn_translateFolder.TabIndex = 7;
             this.btn_translateFolder.Text = "Translate";
             this.btn_translateFolder.UseVisualStyleBackColor = true;
+            this.btn_translateFolder.Click += new System.EventHandler(this.btn_translateFolder_Click);
             // 
             // btn_translateFile
             // 

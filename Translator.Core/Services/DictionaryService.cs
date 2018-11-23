@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Translator.Core.Common;
 using Translator.Core.Filter;
 using Translator.Core.Models;
 
@@ -49,6 +50,19 @@ namespace Translator.Core.Services
                     break;
             }
             return model;
+        }
+
+        public string TranslateText(string text, TranslateType type)
+        {
+            switch (type)
+            {
+                case TranslateType.Jp2Vn:
+                    return TranslateJP2VN(text).VN;
+                case TranslateType.Vn2Jp:
+                    return TranslateVN2JP(text).JP;
+                default:
+                    return text;
+            }
         }
     }
 }
