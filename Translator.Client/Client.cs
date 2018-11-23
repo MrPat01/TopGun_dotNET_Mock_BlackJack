@@ -9,17 +9,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Translator.Core.Common;
+using Translator.Core.IServices;
 
 namespace Translator.Client
 {
     public partial class Client : Form
     {
-        private readonly Core.IServices.IDictionaryService _dictionaryService;
-        private readonly Core.IServices.ITypeService _typeService;
-        public Client(Core.IServices.IDictionaryService dictionaryService, Core.IServices.ITypeService typeService)
+        private readonly IExcelService _excelService;
+        private readonly ITxtService _txtService;
+        private readonly IDictionaryService _dictionaryService;
+        private readonly ITypeService _typeService;
+        public Client(IDictionaryService dictionaryService, ITypeService typeService, IExcelService excelService, ITxtService txtService)
         {
             _dictionaryService = dictionaryService;
             _typeService = typeService;
+            _excelService = excelService;
+            _txtService = txtService;
             InitializeComponent();
         }
 
@@ -30,12 +35,17 @@ namespace Translator.Client
 
         private void Client_Load(object sender, EventArgs e)
         {
+            var type = _typeService.GetAll();
+            cbb_type.DataSource = type;
+            cbb_type.DisplayMember = "Name";
+            cbb_type.ValueMember = "Id";
+            cbb_type.SelectedValue = type.FirstOrDefault().Id;
         }
 
         private void btn_BrowseFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog result = new OpenFileDialog();
-            result.Filter = "All Files (*.txt, *.xlsx, *.xls)|*.txt; *.xlsx; *.xls";
+            result.Filter = "All Files (*.txt, *.xlsx)|*.txt; *.xlsx";
             if (result.ShowDialog() == DialogResult.OK)
             {
                 txt_FilePath.Text = openFileDialog1.FileName;
@@ -68,86 +78,64 @@ namespace Translator.Client
         private void btn_translateFile_Click(object sender, EventArgs e)
         {
             string path = txt_FilePath.Text;
-            int type = (int)cbb_type.SelectedValue;
+            var type = (TranslateType)cbb_type.SelectedValue;
+
             if (!string.IsNullOrWhiteSpace(path))
             {
                 if (path.IndexOf(".txt") != -1)
                 {
-                    translateTxt(path, type);
+                    string newPath = path.Replace(".xlsx", "_JP.xlsx");
+                    _txtService.Translate(path, newPath, type);
                 }
                 else if (path.IndexOf(".xlsx") != -1)
                 {
                     string newPath = path.Replace(".xlsx", "_JP.xlsx");
-                }
-                else
-                {
-                    string newPath = path.Replace(".xls", "_JP.xls");
+                    _excelService.Translate(path, newPath, type);
                 }
             }
         }
 
-        public void translateTxt(string filePath, int type)
+        private void btn_translateFolder_Click(object sender, EventArgs e)
         {
-            if (type == (int)TranslateType.Vn2Jp)
+            int type = (int)cbb_type.SelectedValue;
+            string path = txt_FolderPath.Text;
+            var files = Directory.GetFiles(path);
+            var excelFiles = files.Where(f => f.EndsWith(".xlsx"));
+            var txtFiles = files.Where(f => f.EndsWith(".xlsx"));
+            foreach (var file in excelFiles)
             {
-                string newPath = filePath.Replace(".txt", "_JP.txt");
-                string readText = File.ReadAllText(filePath);
-
-                var SplitReadText = readText.Split('.');
-                string createText = "";
-
-                foreach (var item in SplitReadText)
-                {
-                    if (string.IsNullOrWhiteSpace(item))
-                    {
-                        continue;
-                    }
-                    var text = item.Replace("\r", "").Replace("\n", "");
-                    text += ".";
-                    //translate here
-
-                    if (item.IndexOf("\n") > 0)
-                    {
-                        createText += Environment.NewLine + _dictionaryService.TranslateVN2JP(text).JP;
-                    }
-                    else
-                    {
-                        createText += _dictionaryService.TranslateVN2JP(text).JP;
-                    }
-                }
-
-                File.WriteAllText(newPath, createText, Encoding.UTF8);
+                string newPath = file.Replace(".xlsx", "_JP.xlsx");
+                _excelService.Translate(file, newPath, (TranslateType) type);
             }
-            else
+            foreach (var file in txtFiles)
             {
-                string newPath = filePath.Replace(".txt", "_VN.txt");
-                string readText = File.ReadAllText(filePath);
-
-                var SplitReadText = readText.Split('.');
-                string createText = "";
-
-                foreach (var item in SplitReadText)
-                {
-                    if (string.IsNullOrWhiteSpace(item))
-                    {
-                        continue;
-                    }
-                    var text = item.Replace("\r", "").Replace("\n", "");
-                    text += ".";
-                    //translate here
-
-                    if (item.IndexOf("\n") > 0)
-                    {
-                        createText += Environment.NewLine + _dictionaryService.TranslateVN2JP(text).VN;
-                    }
-                    else
-                    {
-                        createText += _dictionaryService.TranslateVN2JP(text).VN;
-                    }
-                }
-
-                File.WriteAllText(newPath, createText, Encoding.UTF8);
+                string newPath = path.Replace(".xlsx", "_JP.xlsx");
+                _txtService.Translate(path, newPath, (TranslateType) type);
             }
         }
+
+        //private void btn_translateFolder_Click(object sender, EventArgs e)
+        //{
+        //    string folderPath = txt_FolderPath.Text;
+        //    foreach (string path in Directory.EnumerateFiles(folderPath, "*.txt; *.xlsx; *.xls"))
+        //    {
+        //        int type = (int)cbb_type.SelectedValue;
+        //        if (!string.IsNullOrWhiteSpace(path))
+        //        {
+        //            if (path.IndexOf(".txt") != -1)
+        //            {
+        //                translateTxt(path, type);
+        //            }
+        //            else if (path.IndexOf(".xlsx") != -1)
+        //            {
+        //                string newPath = path.Replace(".xlsx", "_JP.xlsx");
+        //            }
+        //            else
+        //            {
+        //                string newPath = path.Replace(".xls", "_JP.xls");
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

@@ -15,19 +15,21 @@ namespace Translator.Core
         // 
         // If you wish to target a different database and/or database provider, modify the 'TranslatorContext' 
         // connection string in the application configuration file.
-        public TranslatorContext()
-            : base(Utility.GetConnectionString()) { }
-
-        //}
         //public TranslatorContext()
-        //    : base("name=TranslatorContext")
+        //    : base(Utility.GetConnectionString())
         //{
+        //    //this.Database.Connection.ConnectionString = ;
         //}
 
-            // Add a DbSet for each entity type that you want to include in your model. For more information 
-            // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
+        public TranslatorContext()
+            : base("name=TranslatorContext")
+        {
+        }
 
-            // public virtual DbSet<MyEntity> MyEntities { get; set; }
+        // Add a DbSet for each entity type that you want to include in your model. For more information 
+        // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
+
+        // public virtual DbSet<MyEntity> MyEntities { get; set; }
         public virtual DbSet<ConfigPath> ConfigPath { get; set; }
         public virtual DbSet<Dictionary> Dictionary { get; set; }
         public virtual DbSet<Field> Field { get; set; }

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Translator.Core.Common;
 using Translator.Core.Filter;
 using Translator.Core.Models;
 
 namespace Translator.Core.Services
 {
-    public class DictionaryService : Repository<Dictionary>, Translator.Core.IServices.IDictionaryService
+    public class DictionaryService : Repository<Dictionary>, IServices.IDictionaryService
     {
         public DictionaryService(TranslatorContext dbContext) : base(dbContext)
         {
@@ -27,13 +27,15 @@ namespace Translator.Core.Services
         }
         public Dictionary TranslateVN2JP(string Input)
         {
-            var query = GetAll().Where(x => x.VN == Input).FirstOrDefault();
-            return query;
+            Dictionary model = new Dictionary();
+            model = GetAll().Where(x => x.VN == Input).FirstOrDefault();
+            return model;
         }
         public Dictionary TranslateJP2VN(string Input)
         {
-            var query = GetAll().Where(x => x.JP == Input).FirstOrDefault();
-            return query;
+            Dictionary model = new Dictionary();
+            model = GetAll().Where(x => x.JP == Input).FirstOrDefault();
+            return model;
         }
 
         public Dictionary Translate(string Input, int type)
@@ -49,6 +51,19 @@ namespace Translator.Core.Services
                     break;
             }
             return model;
+        }
+
+        public string TranslateText(string text, TranslateType type)
+        {
+            switch (type)
+            {
+                case TranslateType.Jp2Vn:
+                    return TranslateJP2VN(text).VN;
+                case TranslateType.Vn2Jp:
+                    return TranslateVN2JP(text).JP;
+                default:
+                    return text;
+            }
         }
     }
 }

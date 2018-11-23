@@ -64,6 +64,8 @@
     <Compile Include="IServices\ICategoryService.cs" />
     <Compile Include="IServices\IConfigPathService.cs" />
     <Compile Include="IServices\IDictionaryService.cs" />
+    <Compile Include="IServices\ITxtService.cs" />
+    <Compile Include="IServices\IExcelService.cs" />
     <Compile Include="IServices\ITypeService.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\ConfigPathService.cs" />
     <Compile Include="Services\DictionaryService.cs" />
+    <Compile Include="Services\TxtService.cs" />
     <Compile Include="Services\TypeService.cs" />
     <Compile Include="Services\ExcelService.cs" />
     <Compile Include="TranslatorContext.cs" />
@@ -85,6 +88,9 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Migration.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
