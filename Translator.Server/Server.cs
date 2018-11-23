@@ -23,40 +23,17 @@ namespace Translator.Server
             this.Text = "Black Jack - Server -v01.00";
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-        
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox2_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Server_Load(object sender, EventArgs e)
         {
-            var configPath = _configPathService.GetAll();
+            var configPath = _configPathService.GetAll().ToList();
+            txt_JP_Input.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNInput").Path;
+            txt_JP_BackUp.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNBackUp").Path;
+            txt_JP_Output.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNOutput").Path;
+            txt_JP_Error.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNError").Path;
+            txt_VN_Input.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPInput").Path;
+            txt_VN_Backup.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPBackUp").Path;
+            txt_VN_Output.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPOutput").Path;
+            txt_VN_Error.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPError").Path;
         }
 
         private void btn_JP_Input_Click(object sender, EventArgs e)

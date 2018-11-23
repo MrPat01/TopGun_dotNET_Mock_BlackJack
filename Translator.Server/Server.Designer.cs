@@ -89,7 +89,6 @@
             this.label1.Size = new System.Drawing.Size(770, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = " [FPT Direct Marketing : VN - JP Translation Tool]";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tabControl1
             // 
@@ -283,7 +282,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Translate JP 2 VN";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // btn_JP_Error
             // 
@@ -383,7 +381,6 @@
             this.label5.Size = new System.Drawing.Size(79, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "Backup Folder:";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label4
             // 
@@ -494,7 +491,6 @@
             this.label10.Size = new System.Drawing.Size(56, 13);
             this.label10.TabIndex = 2;
             this.label10.Text = "DucTV13:";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // label9
             // 
@@ -505,7 +501,6 @@
             this.label9.Size = new System.Drawing.Size(118, 13);
             this.label9.TabIndex = 1;
             this.label9.Text = "WE COME FROM DES";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label8
             // 
@@ -517,7 +512,6 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "TEAM 02";
             this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // openFileDialog1
             // 
