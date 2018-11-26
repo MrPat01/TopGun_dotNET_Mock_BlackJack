@@ -36,7 +36,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.GridData = new System.Windows.Forms.DataGridView();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -68,9 +68,10 @@
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridData)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_search
@@ -90,6 +91,7 @@
             this.btn_add_new.TabIndex = 78;
             this.btn_add_new.Text = "Add new (F8)";
             this.btn_add_new.UseVisualStyleBackColor = true;
+            this.btn_add_new.Click += new System.EventHandler(this.btn_add_new_Click);
             // 
             // btn_delete_data
             // 
@@ -99,6 +101,7 @@
             this.btn_delete_data.TabIndex = 77;
             this.btn_delete_data.Text = "Xóa dữ liệu đã chọn (F12)";
             this.btn_delete_data.UseVisualStyleBackColor = true;
+            this.btn_delete_data.Click += new System.EventHandler(this.btn_delete_data_Click);
             // 
             // label2
             // 
@@ -131,7 +134,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.GridData);
             this.groupBox2.Controls.Add(this.textBox8);
             this.groupBox2.Controls.Add(this.textBox7);
             this.groupBox2.Controls.Add(this.textBox6);
@@ -179,13 +182,21 @@
             this.label4.TabIndex = 110;
             this.label4.Text = "Search result";
             // 
-            // dataGridView1
+            // GridData
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(27, 232);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(770, 223);
-            this.dataGridView1.TabIndex = 109;
+            this.GridData.AllowDrop = true;
+            this.GridData.AllowUserToAddRows = false;
+            this.GridData.AllowUserToDeleteRows = false;
+            this.GridData.AllowUserToOrderColumns = true;
+            this.GridData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GridData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.check});
+            this.GridData.Location = new System.Drawing.Point(27, 232);
+            this.GridData.Name = "GridData";
+            this.GridData.Size = new System.Drawing.Size(770, 223);
+            this.GridData.TabIndex = 109;
+            this.GridData.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridData_CellValueChanged);
+            this.GridData.DoubleClick += new System.EventHandler(this.GridData_DoubleClick);
             // 
             // textBox8
             // 
@@ -427,6 +438,11 @@
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 78;
             // 
+            // check
+            // 
+            this.check.HeaderText = "check";
+            this.check.Name = "check";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -439,11 +455,12 @@
             this.Controls.Add(this.btn_delete_data);
             this.Name = "MainForm";
             this.Text = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.GridData)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -457,7 +474,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox6;
@@ -489,5 +505,7 @@
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox1;
+        public System.Windows.Forms.DataGridView GridData;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn check;
     }
 }
