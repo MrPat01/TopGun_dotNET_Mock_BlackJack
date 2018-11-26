@@ -131,6 +131,7 @@
             // 
             // txt_id
             // 
+            this.txt_id.Enabled = false;
             this.txt_id.Location = new System.Drawing.Point(109, 24);
             this.txt_id.Name = "txt_id";
             this.txt_id.Size = new System.Drawing.Size(148, 20);
@@ -216,6 +217,7 @@
             this.btn_add.TabIndex = 49;
             this.btn_add.Text = "Add";
             this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // btn_clear_data
             // 
