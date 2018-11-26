@@ -40,17 +40,21 @@
             this.cbProperty.Name = "cbProperty";
             this.cbProperty.Size = new System.Drawing.Size(121, 21);
             this.cbProperty.TabIndex = 1;
+            this.cbProperty.SelectedIndexChanged += new System.EventHandler(this.cbProperty_SelectedIndexChanged);
             // 
             // cbOperation
             // 
+            this.cbOperation.Enabled = false;
             this.cbOperation.FormattingEnabled = true;
             this.cbOperation.Location = new System.Drawing.Point(135, 12);
             this.cbOperation.Name = "cbOperation";
             this.cbOperation.Size = new System.Drawing.Size(121, 21);
             this.cbOperation.TabIndex = 2;
+            this.cbOperation.SelectedIndexChanged += new System.EventHandler(this.cbOperation_SelectedIndexChanged);
             // 
             // tbSearchValue
             // 
+            this.tbSearchValue.Enabled = false;
             this.tbSearchValue.Location = new System.Drawing.Point(262, 13);
             this.tbSearchValue.Name = "tbSearchValue";
             this.tbSearchValue.Size = new System.Drawing.Size(100, 20);

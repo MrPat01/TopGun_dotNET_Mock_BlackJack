@@ -7,13 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Translator.Core.IServices;
 
 namespace Translator.Admin
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private IFieldService _fieldService;
+        public MainForm(IFieldService fieldService)
         {
+            _fieldService = fieldService;
             InitializeComponent();
         }
 

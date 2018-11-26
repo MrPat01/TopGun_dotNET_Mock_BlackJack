@@ -66,11 +66,8 @@
     <Compile Include="IServices\IDictionaryService.cs" />
     <Compile Include="IServices\ITxtService.cs" />
     <Compile Include="IServices\IExcelService.cs" />
+    <Compile Include="IServices\IFieldService.cs" />
     <Compile Include="IServices\ITypeService.cs" />
-    <Compile Include="Migrations\201811231045551_Core.cs" />
-    <Compile Include="Migrations\201811231045551_Core.Designer.cs">
-      <DependentUpon>201811231045551_Core.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ConfigPath.cs" />
@@ -83,6 +80,7 @@
     <Compile Include="Services\ConfigPathService.cs" />
     <Compile Include="Services\DictionaryService.cs" />
     <Compile Include="Services\TxtService.cs" />
+    <Compile Include="Services\FieldService.cs" />
     <Compile Include="Services\TypeService.cs" />
     <Compile Include="Services\ExcelService.cs" />
     <Compile Include="TranslatorContext.cs" />
@@ -95,11 +93,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Migration.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201811231045551_Core.resx">
-      <DependentUpon>201811231045551_Core.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

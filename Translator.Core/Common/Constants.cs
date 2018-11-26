@@ -9,6 +9,11 @@ namespace Translator.Core.Common
     public class Constants
     {
         public static readonly string FileAppendJp2Vn = "_japanese";
+        public static readonly List<string> Operations = new List<string>()
+        {
+            "Equal",
+            "Contain"
+        };
     }
 
     public enum TranslateType
