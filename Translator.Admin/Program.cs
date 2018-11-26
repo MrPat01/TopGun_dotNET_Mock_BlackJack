@@ -7,6 +7,10 @@ using System.Windows.Forms;
 using Translator.Core;
 using Translator.Core.IServices;
 using Translator.Core.Services;
+using SimpleInjector;
+using Translator.Core;
+using Translator.Core.IServices;
+using Translator.Core.Services;
 
 namespace Translator.Admin
 {
@@ -33,6 +37,7 @@ namespace Translator.Admin
             // Register your types, for instance:
             container.Register<TranslatorContext>(Lifestyle.Singleton);
             container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
+            container.Register<IFieldService, FieldService>(Lifestyle.Singleton);
             container.Register<ITypeService, TypeService>(Lifestyle.Singleton);
             container.Register<IExcelService, ExcelService>(Lifestyle.Singleton);
             container.Register<ITxtService, TxtService>(Lifestyle.Singleton);

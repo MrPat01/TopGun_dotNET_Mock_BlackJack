@@ -8,16 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Translator.Core.IServices;
 
 namespace Translator.Admin
 {
     public partial class MainForm : Form
     {
         private readonly IDictionaryService _dictionaryService;
+        private readonly IFieldService _fieldService;
         public static Core.Models.Dictionary dictionary = new Core.Models.Dictionary();
-        public MainForm(IDictionaryService dictionaryService)
+        public MainForm(IDictionaryService dictionaryService, IFieldService fieldService)
         {
             _dictionaryService = dictionaryService;
+            _fieldService = fieldService;
             InitializeComponent();
         }
 
@@ -41,7 +44,7 @@ namespace Translator.Admin
         private void btn_delete_data_Click(object sender, EventArgs e)
         {
             var confirmDelete = MessageBox.Show("Do you want to delete?", "Confirm delete!!!", MessageBoxButtons.YesNo);
-            if(confirmDelete == DialogResult.Yes)
+            if (confirmDelete == DialogResult.Yes)
             {
                 var cellSelected = GridData.SelectedRows;
                 var count = cellSelected.Count;
@@ -62,7 +65,7 @@ namespace Translator.Admin
                     x.DictionaryTypeId,
                     x.Date,
                 }).ToList();
-            }            
+            }
         }
 
         private void GridData_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -81,7 +84,7 @@ namespace Translator.Admin
 
         private void btn_add_new_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm();
+            EditForm editForm = new EditForm(_dictionaryService);
             editForm.Show();
         }
 
@@ -89,7 +92,7 @@ namespace Translator.Admin
         {
             var cell = GridData.CurrentCell.Value;
             dictionary = _dictionaryService.GetByKey((int)cell);
-            EditForm editForm = new EditForm();
+            EditForm editForm = new EditForm(_dictionaryService);
             editForm.Show();
         }
     }
