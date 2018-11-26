@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.button9 = new System.Windows.Forms.Button();
+            this.btn_Run = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btn_VN_Error = new System.Windows.Forms.Button();
             this.btn_VN_Output = new System.Windows.Forms.Button();
@@ -102,7 +102,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.button9);
+            this.tabPage1.Controls.Add(this.btn_Run);
             this.tabPage1.Controls.Add(this.groupBox3);
             this.tabPage1.Controls.Add(this.groupBox4);
             this.tabPage1.Controls.Add(this.groupBox2);
@@ -115,14 +115,15 @@
             this.tabPage1.Text = "Translate";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // btn_Run
             // 
-            this.button9.Location = new System.Drawing.Point(162, 349);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(75, 23);
-            this.button9.TabIndex = 5;
-            this.button9.Text = "Run";
-            this.button9.UseVisualStyleBackColor = true;
+            this.btn_Run.Location = new System.Drawing.Point(162, 349);
+            this.btn_Run.Name = "btn_Run";
+            this.btn_Run.Size = new System.Drawing.Size(75, 23);
+            this.btn_Run.TabIndex = 5;
+            this.btn_Run.Text = "Run";
+            this.btn_Run.UseVisualStyleBackColor = true;
+            this.btn_Run.Click += new System.EventHandler(this.btn_Run_Click);
             // 
             // groupBox3
             // 
@@ -566,7 +567,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button btn_Run;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;

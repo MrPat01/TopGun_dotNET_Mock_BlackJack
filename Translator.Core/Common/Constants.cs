@@ -9,6 +9,7 @@ namespace Translator.Core.Common
     public class Constants
     {
         public static readonly string FileAppendJp2Vn = "_japanese";
+        public static readonly int refresh_time = (1 * 60 * 1000); // 1 min
     }
 
     public enum TranslateType

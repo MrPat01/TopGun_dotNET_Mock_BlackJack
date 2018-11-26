@@ -137,7 +137,7 @@ namespace Translator.Server
             string folderJPOutPut = txt_JP_Output.Text;
             string folderJPInPut = txt_JP_Input.Text;
             //get file name order by ASC
-            var fileInFolderVNOutPut = Directory.EnumerateFiles(folderVNOutPut, "*.txt; *.xlsx;").OrderBy(x=>x).ToList();
+            var fileInFolderVNOutPut = Directory.EnumerateFiles(folderVNOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
             var fileInFolderVNInPut = Directory.EnumerateFiles(folderVNInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
             var fileInFolderJPOutPut = Directory.EnumerateFiles(folderJPOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
             var fileInFolderJPInPut = Directory.EnumerateFiles(folderJPInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
@@ -223,6 +223,19 @@ namespace Translator.Server
                 string newPath = file.Replace(".txt", "_VN.txt");
                 _txtService.Translate(file, newPath, TranslateType.Jp2Vn);
             }
+        }
+
+        private void btn_Run_Click(object sender, EventArgs e)
+        {
+            Timer MyTimer = new Timer();
+            MyTimer.Interval = Constants.refresh_time; 
+            MyTimer.Tick += new EventHandler(MyTimer_Tick);
+            MyTimer.Start();
+        }
+
+        private void MyTimer_Tick(object sender, EventArgs e)
+        {
+            AutoTranslate();
         }
     }
 }
