@@ -15,6 +15,12 @@ namespace Translator.Core.Common
             "Equal",
             "Contain"
         };
+
+        public static readonly List<string> AndOr = new List<string>()
+        {
+            "AND",
+            "OR"
+        };
     }
 
     public enum TranslateType
