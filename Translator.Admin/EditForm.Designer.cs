@@ -215,7 +215,7 @@
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(105, 23);
             this.btn_add.TabIndex = 49;
-            this.btn_add.Text = "Add";
+            this.btn_add.Text = "Save";
             this.btn_add.UseVisualStyleBackColor = true;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
@@ -238,6 +238,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "EditForm";
             this.Text = "EditForm";
+            this.Load += new System.EventHandler(this.EditForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

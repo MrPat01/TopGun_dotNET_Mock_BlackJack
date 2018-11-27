@@ -84,7 +84,7 @@ namespace Translator.Admin
 
         private void btn_add_new_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(_dictionaryService);
+            EditForm editForm = new EditForm(_dictionaryService, new Core.Models.Dictionary());
             editForm.Show();
         }
 
@@ -92,7 +92,7 @@ namespace Translator.Admin
         {
             var cell = GridData.CurrentCell.Value;
             dictionary = _dictionaryService.GetByKey((int)cell);
-            EditForm editForm = new EditForm(_dictionaryService);
+            EditForm editForm = new EditForm(_dictionaryService, dictionary);
             editForm.Show();
         }
     }
