@@ -81,6 +81,7 @@
             this.Controls.Add(this.cbProperty);
             this.Name = "SearchBox";
             this.Size = new System.Drawing.Size(380, 31);
+            this.Load += new System.EventHandler(this.SearchBox_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

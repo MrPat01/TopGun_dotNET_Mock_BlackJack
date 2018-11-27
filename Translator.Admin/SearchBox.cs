@@ -33,15 +33,8 @@ namespace Translator.Admin
             cbProperty.DataSource = type;
             cbProperty.DisplayMember = "Name";
             cbProperty.ValueMember = "Id";
-            //cbProperty.SelectedItem = null;
-
-            var operations = Constants.Operations;
             cbOperation.DataSource = Constants.Operations;
-            //cbOperation.SelectedItem = null;
-
-            var andOr = Constants.AndOr;
-            cbAndOr.DataSource = Constants.Operations;
-            //cbOperation.SelectedItem = null;
+            cbAndOr.DataSource = Constants.AndOr;
         }
 
         private void cbProperty_SelectedIndexChanged(object sender, EventArgs e)
@@ -68,7 +61,7 @@ namespace Translator.Admin
         {
             if (EnableAndOrCombobox && cbAndOr.SelectedIndex > 0)
             {
-                return " " + ((string) cbAndOr.SelectedItem).ToLower() + " ";
+                return " " + ((string)cbAndOr.SelectedItem).ToLower() + " ";
             }
             else
             {
@@ -81,14 +74,14 @@ namespace Translator.Admin
             if (cbProperty.SelectedIndex > 0 && cbOperation.SelectedIndex > 0 &&
                 !string.IsNullOrWhiteSpace(tbSearchValue.Text) && (!EnableAndOrCombobox || cbAndOr.SelectedIndex > 0))
             {
-                var property = (Field) cbProperty.SelectedItem;
-                var operation = (string) cbOperation.SelectedItem;
+                var property = (Field)cbProperty.SelectedItem;
+                var operation = (string)cbOperation.SelectedItem;
                 var value = tbSearchValue.Text;
                 switch (operation)
                 {
                     case "Equal": return DynamicExpression.ParseLambda<Dictionary, bool>(property.Name + " = @0", value);
                     case "Contain": return DynamicExpression.ParseLambda<Dictionary, bool>(property.Name + ".Contains(@0)", value);
-                    default:return null;
+                    default: return null;
                 }
             }
             else
@@ -99,8 +92,10 @@ namespace Translator.Admin
 
         private void cbAndOr_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+
             var selectedIndex = cbAndOr.SelectedIndex;
-            if(selectedIndex == 0)
+            if (selectedIndex == 0)
             {
                 tbSearchValue.Enabled = cbProperty.Enabled = cbOperation.Enabled = false;
             }
@@ -109,6 +104,20 @@ namespace Translator.Admin
                 cbProperty.Enabled = true;
                 cbOperation.Enabled = cbProperty.SelectedIndex > 0;
                 tbSearchValue.Enabled = cbOperation.SelectedIndex > 0;
+            }
+
+
+        }
+
+        private void SearchBox_Load(object sender, EventArgs e)
+        {
+            if (EnableAndOrCombobox)
+            {
+                cbProperty.Enabled = false;
+            }
+            else
+            {
+                cbProperty.Enabled = true;
             }
         }
     }

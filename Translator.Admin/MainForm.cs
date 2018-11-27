@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Translator.Core.IServices;
 using System.Drawing;
 using System.Linq;
@@ -106,16 +107,16 @@ namespace Translator.Admin
             foreach (var searchBox in listSearchBox)
             {
                 var expression = searchBox.GetExpression();
-                var andOr = string.Empty;
+                var andOr = searchBox.GetAndOr();
                 if (expression != null)
                 {
-                    predicate += andOr + $"@{parameterIndex}";
+                    predicate += andOr + $"@{parameterIndex}(it)";
                     parameterList.Add(expression);
                     parameterIndex++;
                 }
             }
 
-            IQueryable<Dictionary> query = _dictionaryService.GetAll().Where(predicate, parameterList);
+            var query = _dictionaryService.GetAll().ToList().Where(predicate, parameterList.ToArray());
             GridData.DataSource = query.Select(x => new
             {
                 x.Id,
@@ -137,8 +138,8 @@ namespace Translator.Admin
         private void GridData_DoubleClick(object sender, EventArgs e)
         {
             var cell = GridData.CurrentCell.Value;
-            Dictionary = _dictionaryService.GetByKey((int)cell);
-            EditForm editForm = new EditForm(_dictionaryService, Dictionary);
+            dictionary = _dictionaryService.GetByKey((int)cell);
+            EditForm editForm = new EditForm(_dictionaryService, dictionary);
             editForm.Show();
         }
     }
