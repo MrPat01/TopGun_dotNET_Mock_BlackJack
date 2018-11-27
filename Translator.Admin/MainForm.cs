@@ -2,20 +2,40 @@
 using Translator.Core.IServices;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Dynamic;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Translator.Core.Models;
+using Translator.Core.Services;
+using DynamicExpression = System.Linq.Dynamic.DynamicExpression;
 
 namespace Translator.Admin
 {
     public partial class MainForm : Form
     {
+        public static Core.Models.Dictionary dictionary = new Core.Models.Dictionary();
         private readonly IDictionaryService _dictionaryService;
-        private readonly IFieldService _fieldService;
-        public static Core.Models.Dictionary Dictionary = new Core.Models.Dictionary();
-        public MainForm(IDictionaryService dictionaryService, IFieldService fieldService)
+        private readonly List<SearchBox> listSearchBox;
+
+        public MainForm(IDictionaryService dictionaryService)
         {
             _dictionaryService = dictionaryService;
-            _fieldService = fieldService;
             InitializeComponent();
+            listSearchBox = new List<SearchBox>
+            {
+                searchBox1,
+                searchBox2,
+                searchBox3,
+                searchBox4,
+                searchBox5,
+                searchBox6,
+                searchBox7,
+                searchBox8,
+                searchBox9,
+                searchBox10,
+            };
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -44,9 +64,10 @@ namespace Translator.Admin
                 var count = cellSelected.Count;
                 for (int i = 0; i < count; i++)
                 {
-                    var id = (int)cellSelected[i].Cells[1].Value;
+                    var id = (int) cellSelected[i].Cells[1].Value;
                     _dictionaryService.Delete(id);
                 }
+
                 MessageBox.Show("Delete success!!!");
                 GridData.DataSource = _dictionaryService.GetAll().Select(x => new
                 {
@@ -76,6 +97,26 @@ namespace Translator.Admin
             }
         }
 
+        private void btn_search_Click(object sender, EventArgs e)
+        {
+            var predicate = string.Empty;
+            var parameterList = new List<Expression<Func<Dictionary, bool>>>();
+            int parameterIndex = 0;
+
+            foreach (var searchBox in listSearchBox)
+            {
+                var expression = searchBox.GetExpression();
+                var andOr = string.Empty;
+                if (expression != null)
+                {
+                    predicate += andOr + $"@{parameterIndex}";
+                    parameterList.Add(expression);
+                    parameterIndex++;
+                }
+            }
+
+            IQueryable<Dictionary> query = _dictionaryService.GetAll().Where(predicate, parameterList);
+        }
         private void btn_add_new_Click(object sender, EventArgs e)
         {
             EditForm editForm = new EditForm(_dictionaryService, new Core.Models.Dictionary());

@@ -12,10 +12,17 @@ namespace Translator.Admin
     public partial class SearchBox : UserControl
     {
         private IFieldService _fieldService;
-        public SearchBox(IFieldService fieldService)
+
+        public bool EnableAndOrCombobox
         {
-            _fieldService = fieldService;
+            get => cbAndOr.Visible;
+            set => cbAndOr.Visible = value;
+        }
+
+        public SearchBox()
+        {
             InitializeComponent();
+            _fieldService = Program.container.GetInstance<IFieldService>();
             SetComboBoxData();
         }
 
@@ -29,8 +36,11 @@ namespace Translator.Admin
             //cbProperty.SelectedItem = null;
 
             var operations = Constants.Operations;
-            operations.Insert(0, String.Empty);
             cbOperation.DataSource = Constants.Operations;
+            //cbOperation.SelectedItem = null;
+
+            var andOr = Constants.AndOr;
+            cbAndOr.DataSource = Constants.Operations;
             //cbOperation.SelectedItem = null;
         }
 
@@ -54,10 +64,22 @@ namespace Translator.Admin
             tbSearchValue.Enabled = selectedIndex > 0;
         }
 
+        public string GetAndOr()
+        {
+            if (EnableAndOrCombobox && cbAndOr.SelectedIndex > 0)
+            {
+                return " " + ((string) cbAndOr.SelectedItem).ToLower() + " ";
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         public Expression<Func<Dictionary, bool>> GetExpression()
         {
             if (cbProperty.SelectedIndex > 0 && cbOperation.SelectedIndex > 0 &&
-                !string.IsNullOrWhiteSpace(tbSearchValue.Text))
+                !string.IsNullOrWhiteSpace(tbSearchValue.Text) && (!EnableAndOrCombobox || cbAndOr.SelectedIndex > 0))
             {
                 var property = (Field) cbProperty.SelectedItem;
                 var operation = (string) cbOperation.SelectedItem;
@@ -72,6 +94,21 @@ namespace Translator.Admin
             else
             {
                 return null;
+            }
+        }
+
+        private void cbAndOr_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedIndex = cbAndOr.SelectedIndex;
+            if(selectedIndex == 0)
+            {
+                tbSearchValue.Enabled = cbProperty.Enabled = cbOperation.Enabled = false;
+            }
+            else
+            {
+                cbProperty.Enabled = true;
+                cbOperation.Enabled = cbProperty.SelectedIndex > 0;
+                tbSearchValue.Enabled = cbOperation.SelectedIndex > 0;
             }
         }
     }

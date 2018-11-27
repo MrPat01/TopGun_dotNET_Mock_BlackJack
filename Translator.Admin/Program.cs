@@ -9,7 +9,7 @@ namespace Translator.Admin
 {
     static class Program
     {
-        private static Container container;
+        public static Container container;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -29,6 +29,8 @@ namespace Translator.Admin
 
             // Register your types, for instance:
             container.Register<TranslatorContext>(Lifestyle.Singleton);
+            container.Register(typeof(IRepository<>), typeof(Repository<>), Lifestyle.Singleton);
+            container.Register<ITranslateFailService, TranslateFailService>(Lifestyle.Singleton);
             container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
             container.Register<IFieldService, FieldService>(Lifestyle.Singleton);
             container.Register<ITypeService, TypeService>(Lifestyle.Singleton);

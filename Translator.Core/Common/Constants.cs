@@ -8,8 +8,16 @@ namespace Translator.Core.Common
         public static readonly int RefreshTime = (1 * 60 * 1000); // 1 min
         public static readonly List<string> Operations = new List<string>()
         {
+            "",
             "Equal",
             "Contain"
+        };
+
+        public static readonly List<string> AndOr = new List<string>()
+        {
+            "",
+            "AND",
+            "OR"
         };
     }
 
