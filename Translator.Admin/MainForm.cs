@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using Translator.Core.IServices;
-using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -140,8 +137,8 @@ namespace Translator.Admin
         private void GridData_DoubleClick(object sender, EventArgs e)
         {
             var cell = GridData.CurrentCell.Value;
-            dictionary = _dictionaryService.GetByKey((int)cell);
-            EditForm editForm = new EditForm(_dictionaryService, dictionary);
+            Dictionary = _dictionaryService.GetByKey((int)cell);
+            EditForm editForm = new EditForm(_dictionaryService, Dictionary);
             editForm.Show();
         }
     }

@@ -1,19 +1,17 @@
 namespace Translator.Core.Migrations
 {
-    using System;
-    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using Translator.Core.Models;
+    using Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Translator.Core.TranslatorContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<TranslatorContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Translator.Core.TranslatorContext context)
+        protected override void Seed(TranslatorContext context)
         {
             if (context.ConfigPath.Count() == 0)
             {
@@ -88,8 +86,8 @@ namespace Translator.Core.Migrations
 
             if (context.Type.Count() == 0)
             {
-                context.Type.Add(new Models.Type { Name = "JP -> VN" });
-                context.Type.Add(new Models.Type { Name = "VN -> JP" });
+                context.Type.Add(new Type { Name = "JP -> VN" });
+                context.Type.Add(new Type { Name = "VN -> JP" });
             }
             //  This method will be called after migrating to the latest version.
 

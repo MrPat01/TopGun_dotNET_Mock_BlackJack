@@ -1,15 +1,16 @@
 ﻿using System;
-using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using Translator.Core.Common;
 using Translator.Core.IServices;
+using Type = Translator.Core.Models.Type;
 
 namespace Translator.Client
 {
     public partial class Client : Form
     {
+        private const string V = "All Files (*.txt, *.xlsx)|*.txt; *.xlsx";
         private readonly IExcelService _excelService;
         private readonly ITxtService _txtService;
         private readonly IDictionaryService _dictionaryService;
@@ -34,13 +35,20 @@ namespace Translator.Client
             cbb_type.DataSource = type;
             cbb_type.DisplayMember = "Name";
             cbb_type.ValueMember = "Id";
-            cbb_type.SelectedValue = type.FirstOrDefault().Id;
+            Type first = null;
+            foreach (var type1 in type)
+            {
+                first = type1;
+                break;
+            }
+
+            if (first != null) cbb_type.SelectedValue = first.Id;
         }
 
         private void btn_BrowseFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog result = new OpenFileDialog();
-            result.Filter = "All Files (*.txt, *.xlsx)|*.txt; *.xlsx";
+            result.Filter = V;
             if (result.ShowDialog() == DialogResult.OK)
             {
                 txt_FilePath.Text = openFileDialog1.FileName;
@@ -59,14 +67,14 @@ namespace Translator.Client
         private void btn_VN2JP_Click(object sender, EventArgs e)
         {
             var text = txt_VN.Text;
-            var TranslatedText = _dictionaryService.TranslateVN2JP(text);
+            var TranslatedText = _dictionaryService.TranslateVn2Jp(text);
             txt_JP.Text = TranslatedText.JP;
         }
 
         private void btn_JP2VN_Click(object sender, EventArgs e)
         {
             var text = txt_JP.Text;
-            var TranslatedText = _dictionaryService.TranslateJP2VN(text);
+            var TranslatedText = _dictionaryService.TranslateJp2Vn(text);
             txt_VN.Text = TranslatedText.VN;
         }
 
@@ -108,29 +116,5 @@ namespace Translator.Client
                 _txtService.Translate(file, newPath, type);
             }
         }
-
-        //private void btn_translateFolder_Click(object sender, EventArgs e)
-        //{
-        //    string folderPath = txt_FolderPath.Text;
-        //    foreach (string path in Directory.EnumerateFiles(folderPath, "*.txt; *.xlsx; *.xls"))
-        //    {
-        //        int type = (int)cbb_type.SelectedValue;
-        //        if (!string.IsNullOrWhiteSpace(path))
-        //        {
-        //            if (path.IndexOf(".txt") != -1)
-        //            {
-        //                translateTxt(path, type);
-        //            }
-        //            else if (path.IndexOf(".xlsx") != -1)
-        //            {
-        //                string newPath = path.Replace(".xlsx", "_JP.xlsx");
-        //            }
-        //            else
-        //            {
-        //                string newPath = path.Replace(".xls", "_JP.xls");
-        //            }
-        //        }
-        //    }
-        //}
     }
 }

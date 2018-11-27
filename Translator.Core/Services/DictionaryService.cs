@@ -9,55 +9,49 @@ namespace Translator.Core.Services
     public class DictionaryService : Repository<Dictionary>, IServices.IDictionaryService
     {
         IServices.ITranslateFailService _ITranslateFailService;
-        public DictionaryService(TranslatorContext dbContext, IServices.ITranslateFailService ITranslateFailService) : base(dbContext)
+        public DictionaryService(TranslatorContext dbContext, IServices.ITranslateFailService translateFailService) : base(dbContext)
         {
-            _ITranslateFailService = ITranslateFailService;
+            _ITranslateFailService = translateFailService;
         }
         public Dictionary Muti_Condition(List<DictionaryFilter> filter)
         {
             var query = GetAll();
-            foreach (var item in filter)
-            {
-
-            }
             var model = query.FirstOrDefault();
             return model;
         }
-        public Dictionary TranslateVN2JP(string Input)
+        public Dictionary TranslateVn2Jp(string input)
         {
-            var model = GetAll().Where(x => x.VN == Input).FirstOrDefault();
+            var model = GetAll().Where(x => x.VN == input).FirstOrDefault();
             if (model != null)
                 return model;
             else
             {
-                _ITranslateFailService.AddNew(new TranslateFail { Text = Input, typeId = TranslateType.Vn2Jp });
-                return new Translator.Core.Models.Dictionary();
+                _ITranslateFailService.AddNew(new TranslateFail { Text = input, typeId = TranslateType.Vn2Jp });
+                return new Dictionary();
             }
         }
-        public Dictionary TranslateJP2VN(string Input)
+        public Dictionary TranslateJp2Vn(string input)
         {
-            var model = GetAll().Where(x => x.JP == Input).FirstOrDefault();
+            var model = GetAll().Where(x => x.JP == input).FirstOrDefault();
             if (model != null)
                 return model;
             else
             {
-                _ITranslateFailService.AddNew(new TranslateFail { Text = Input, typeId = TranslateType.Jp2Vn });
-                return new Translator.Core.Models.Dictionary();
+                _ITranslateFailService.AddNew(new TranslateFail { Text = input, typeId = TranslateType.Jp2Vn });
+                return new Dictionary();
             }
         }
 
-        public Dictionary Translate(string Input, int type)
+        public Dictionary Translate(string input, int type)
         {
             Dictionary model = new Dictionary();
             switch (type)
             {
                 case 1:
-                    model = TranslateVN2JP(Input);
+                    model = TranslateVn2Jp(input);
                     break;
                 case 2:
-                    model = TranslateJP2VN(Input);
-                    break;
-                default:
+                    model = TranslateJp2Vn(input);
                     break;
             }
             return model;
@@ -68,9 +62,9 @@ namespace Translator.Core.Services
             switch (type)
             {
                 case TranslateType.Jp2Vn:
-                    return TranslateJP2VN(text)?.VN ?? text;
+                    return TranslateJp2Vn(text)?.VN ?? text;
                 case TranslateType.Vn2Jp:
-                    return TranslateVN2JP(text)?.JP ?? text;
+                    return TranslateVn2Jp(text)?.JP ?? text;
                 default:
                     return text;
             }
