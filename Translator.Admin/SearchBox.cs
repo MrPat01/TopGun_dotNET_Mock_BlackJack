@@ -25,8 +25,8 @@ namespace Translator.Admin
         public SearchBox()
         {
             InitializeComponent();
-            //_fieldService = Program.container.GetInstance<IFieldService>();
-            //SetComboBoxData();
+            _fieldService = Program.container.GetInstance<IFieldService>();
+            SetComboBoxData();
         }
 
         private void SetComboBoxData()
@@ -39,12 +39,10 @@ namespace Translator.Admin
             //cbProperty.SelectedItem = null;
 
             var operations = Constants.Operations;
-            operations.Insert(0, String.Empty);
             cbOperation.DataSource = Constants.Operations;
             //cbOperation.SelectedItem = null;
 
             var andOr = Constants.AndOr;
-            andOr.Insert(0, String.Empty);
             cbAndOr.DataSource = Constants.Operations;
             //cbOperation.SelectedItem = null;
         }
@@ -77,7 +75,7 @@ namespace Translator.Admin
             }
             else
             {
-                return string.Empty
+                return string.Empty;
             }
         }
 

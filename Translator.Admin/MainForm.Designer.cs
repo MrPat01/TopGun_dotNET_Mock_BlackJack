@@ -47,7 +47,6 @@
             this.searchBox1 = new Translator.Admin.SearchBox();
             this.label4 = new System.Windows.Forms.Label();
             this.GridData = new System.Windows.Forms.DataGridView();
-            this.searchBox1 = new Translator.Admin.SearchBox(_fieldService);
             this.check = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();

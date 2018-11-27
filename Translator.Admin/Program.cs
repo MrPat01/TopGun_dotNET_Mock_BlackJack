@@ -29,6 +29,8 @@ namespace Translator.Admin
 
             // Register your types, for instance:
             container.Register<TranslatorContext>(Lifestyle.Singleton);
+            container.Register(typeof(IRepository<>), typeof(Repository<>), Lifestyle.Singleton);
+            container.Register<ITranslateFailService, TranslateFailService>(Lifestyle.Singleton);
             container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
             container.Register<IFieldService, FieldService>(Lifestyle.Singleton);
             container.Register<ITypeService, TypeService>(Lifestyle.Singleton);

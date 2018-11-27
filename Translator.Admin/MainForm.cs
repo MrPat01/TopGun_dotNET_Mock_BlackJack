@@ -10,7 +10,6 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Translator.Core.IServices;
 using Translator.Core.Models;
 using Translator.Core.Services;
 using DynamicExpression = System.Linq.Dynamic.DynamicExpression;
@@ -19,12 +18,10 @@ namespace Translator.Admin
 {
     public partial class MainForm : Form
     {
-        private readonly IDictionaryService _dictionaryService;
-        private readonly IFieldService _fieldService;
         public static Core.Models.Dictionary dictionary = new Core.Models.Dictionary();
-        public MainForm(IDictionaryService dictionaryService, IFieldService fieldService)
         private readonly IDictionaryService _dictionaryService;
         private readonly List<SearchBox> listSearchBox;
+
         public MainForm(IDictionaryService dictionaryService)
         {
             _dictionaryService = dictionaryService;
@@ -70,9 +67,10 @@ namespace Translator.Admin
                 var count = cellSelected.Count;
                 for (int i = 0; i < count; i++)
                 {
-                    var id = (int)cellSelected[i].Cells[1].Value;
+                    var id = (int) cellSelected[i].Cells[1].Value;
                     _dictionaryService.Delete(id);
                 }
+
                 MessageBox.Show("Delete success!!!");
                 GridData.DataSource = _dictionaryService.GetAll().Select(x => new
                 {
@@ -101,12 +99,13 @@ namespace Translator.Admin
                     row.Selected = false;
             }
         }
+
         private void btn_search_Click(object sender, EventArgs e)
         {
             var predicate = string.Empty;
             var parameterList = new List<Expression<Func<Dictionary, bool>>>();
             int parameterIndex = 0;
-            
+
             foreach (var searchBox in listSearchBox)
             {
                 var expression = searchBox.GetExpression();
@@ -118,8 +117,9 @@ namespace Translator.Admin
                     parameterIndex++;
                 }
             }
-            IQueryable<Dictionary> query = _dictionaryService.GetAll().Where(predicate, parameterList);
 
+            IQueryable<Dictionary> query = _dictionaryService.GetAll().Where(predicate, parameterList);
+        }
         private void btn_add_new_Click(object sender, EventArgs e)
         {
             EditForm editForm = new EditForm(_dictionaryService, new Core.Models.Dictionary());
