@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Translator.Core;
+using System.Linq.Expressions;
 
 namespace Translator.Core.IServices
 {
@@ -12,6 +9,7 @@ namespace Translator.Core.IServices
     {
         DbContext GetDbContext();
         IQueryable<T> GetAll();
+        IQueryable<T> GetAll(params Expression<Func<T, object>>[] includeProperties);
         T GetByKey(int Id);
         T AddNew(T entity);
         T Update(T entity);

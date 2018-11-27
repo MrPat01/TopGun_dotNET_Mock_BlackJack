@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Translator.Core.IServices;
-using Translator.Core;
+using System.Linq.Expressions;
 
 namespace Translator.Core.Services
 {
@@ -64,6 +61,11 @@ namespace Translator.Core.Services
             _dbContext.Entry<T>(entity).State = EntityState.Modified;
             _dbContext.SaveChanges();
             return entity;
+        }
+        public IQueryable<T> GetAll(params Expression<Func<T, object>>[] includeProperties)
+        {
+            IQueryable<T> query = _dbContext.Set<T>();
+            return includeProperties.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
         }
     }
 }

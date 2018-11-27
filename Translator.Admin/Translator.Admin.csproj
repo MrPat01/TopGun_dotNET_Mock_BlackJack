@@ -122,7 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Translator.Core\Translator.Core.csproj">
-      <Project>{8E5F9488-D4C3-47B0-B241-5A57ACAF6650}</Project>
+      <Project>{8e5f9488-d4c3-47b0-b241-5a57acaf6650}</Project>
       <Name>Translator.Core</Name>
     </ProjectReference>
   </ItemGroup>
