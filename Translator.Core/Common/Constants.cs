@@ -5,12 +5,40 @@ namespace Translator.Core.Common
     public class Constants
     {
         public static readonly string FileAppendJp2Vn = "_japanese";
-        public static readonly int RefreshTime = (1 * 60 * 1000); // 1 min
-        public static readonly List<string> Operations = new List<string>()
+        public static readonly int RefreshTime = 1 * 60 * 1000; // 1 min
+
+        public static readonly Dictionary<EnumType, List<string>> Operations = new Dictionary<EnumType, List<string>>()
         {
-            "",
-            "Equal",
-            "Contain"
+            {
+                EnumType.String, new List<string>()
+                {
+                    "",
+                    "=",
+                    "Contain"
+                }
+            },
+            {
+                EnumType.Int, new List<string>()
+                {
+                    "",
+                    "=",
+                    ">",
+                    "<",
+                    ">=",
+                    "<=",
+                }
+            },
+            {
+                EnumType.Date, new List<string>()
+                {
+                    "",
+                    "=",
+                    ">",
+                    "<",
+                    ">=",
+                    "<=",
+                }
+            },
         };
 
         public static readonly List<string> AndOr = new List<string>()
@@ -25,5 +53,12 @@ namespace Translator.Core.Common
     {
         Vn2Jp,
         Jp2Vn
+    }
+
+    public enum EnumType
+    {
+        String,
+        Int,
+        Date
     }
 }

@@ -11,8 +11,6 @@ namespace Translator.Admin
 {
     public partial class SearchBox : UserControl
     {
-        private IFieldService _fieldService;
-
         public bool EnableAndOrCombobox
         {
             get => cbAndOr.Visible;
@@ -22,18 +20,18 @@ namespace Translator.Admin
         public SearchBox()
         {
             InitializeComponent();
-            _fieldService = Program.Container.GetInstance<IFieldService>();
             SetComboBoxData();
         }
 
         private void SetComboBoxData()
         {
-            var type = _fieldService.GetAll().ToList();
+            var fieldService = Program.Container.GetInstance<IFieldService>();
+            var type = fieldService.GetAll().ToList();
             type.Insert(0, new Field());
             cbProperty.DataSource = type;
             cbProperty.DisplayMember = "Name";
             cbProperty.ValueMember = "Id";
-            cbOperation.DataSource = Constants.Operations;
+            
             cbAndOr.DataSource = Constants.AndOr;
         }
 
@@ -42,10 +40,13 @@ namespace Translator.Admin
             var selectedIndex = cbProperty.SelectedIndex;
             if (selectedIndex == 0)
             {
+                cbOperation.DataSource = null;
                 tbSearchValue.Enabled = cbOperation.Enabled = false;
             }
             else
             {
+                var selectedValue = (Field) cbProperty.SelectedItem;
+                cbOperation.DataSource = Constants.Operations[selectedValue.Type];
                 cbOperation.Enabled = true;
                 tbSearchValue.Enabled = cbOperation.SelectedIndex > 0;
             }
@@ -76,12 +77,23 @@ namespace Translator.Admin
             {
                 var property = (Field)cbProperty.SelectedItem;
                 var operation = (string)cbOperation.SelectedItem;
-                var value = tbSearchValue.Text;
+                object value = null;
+                switch (property.Type)
+                {
+                    case EnumType.String:
+                        value = tbSearchValue.Text;
+                        break;
+                    case EnumType.Int:
+                        value = int.Parse(tbSearchValue.Text);
+                        break;
+                    case EnumType.Date:
+                        value = DateTime.Parse(tbSearchValue.Text);
+                        break;
+                }
                 switch (operation)
                 {
-                    case "Equal": return DynamicExpression.ParseLambda<Dictionary, bool>(property.Name + " = @0", value);
                     case "Contain": return DynamicExpression.ParseLambda<Dictionary, bool>(property.Name + ".Contains(@0)", value);
-                    default: return null;
+                    default: return DynamicExpression.ParseLambda<Dictionary, bool>(property.Name + " " + operation + " @0", value);
                 }
             }
             else

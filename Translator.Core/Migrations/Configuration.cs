@@ -1,3 +1,5 @@
+using Translator.Core.Common;
+
 namespace Translator.Core.Migrations
 {
     using System.Data.Entity.Migrations;
@@ -63,16 +65,16 @@ namespace Translator.Core.Migrations
 
             if (context.Field.Count() == 0)
             {
-                context.Field.Add(new Field { Name = "JP" });
-                context.Field.Add(new Field { Name = "VN" });
-                context.Field.Add(new Field { Name = "JPLen" });
-                context.Field.Add(new Field { Name = "VNLen" });
-                context.Field.Add(new Field { Name = "Category" });
-                context.Field.Add(new Field { Name = "priority" });
-                context.Field.Add(new Field { Name = "type" });
-                context.Field.Add(new Field { Name = "dictionary_type" });
-                context.Field.Add(new Field { Name = "date" });
-                context.Field.Add(new Field { Name = "inputer" });
+                context.Field.Add(new Field { Name = "Jp", Type = EnumType.String});
+                context.Field.Add(new Field { Name = "Vn", Type = EnumType.String });
+                context.Field.Add(new Field { Name = "JpLength", Type = EnumType.Int });
+                context.Field.Add(new Field { Name = "VnLength", Type = EnumType.Int });
+                context.Field.Add(new Field { Name = "CategoryId", Type = EnumType.Int });
+                context.Field.Add(new Field { Name = "Priority", Type = EnumType.Int });
+                context.Field.Add(new Field { Name = "TypeId", Type = EnumType.Int });
+                context.Field.Add(new Field { Name = "DictionaryTypeId", Type = EnumType.Int });
+                context.Field.Add(new Field { Name = "Date", Type = EnumType.Date });
+                context.Field.Add(new Field { Name = "Inputer", Type = EnumType.String });
 
                 context.SaveChanges();
             }
