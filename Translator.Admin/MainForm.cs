@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using Translator.Core.IServices;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Translator.Core.IServices;
 
 namespace Translator.Admin
 {
@@ -16,7 +10,7 @@ namespace Translator.Admin
     {
         private readonly IDictionaryService _dictionaryService;
         private readonly IFieldService _fieldService;
-        public static Core.Models.Dictionary dictionary = new Core.Models.Dictionary();
+        public static Core.Models.Dictionary Dictionary = new Core.Models.Dictionary();
         public MainForm(IDictionaryService dictionaryService, IFieldService fieldService)
         {
             _dictionaryService = dictionaryService;
@@ -91,8 +85,8 @@ namespace Translator.Admin
         private void GridData_DoubleClick(object sender, EventArgs e)
         {
             var cell = GridData.CurrentCell.Value;
-            dictionary = _dictionaryService.GetByKey((int)cell);
-            EditForm editForm = new EditForm(_dictionaryService, dictionary);
+            Dictionary = _dictionaryService.GetByKey((int)cell);
+            EditForm editForm = new EditForm(_dictionaryService, Dictionary);
             editForm.Show();
         }
     }

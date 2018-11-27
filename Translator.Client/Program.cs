@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SimpleInjector;
 using Translator.Core;
-using Translator.Core.Common;
 using Translator.Core.IServices;
 using Translator.Core.Services;
 
@@ -13,7 +9,7 @@ namespace Translator.Client
 {
     static class Program
     {
-        private static Container container;
+        private static Container _container;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -23,25 +19,25 @@ namespace Translator.Client
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Bootstrap();
-            Application.Run(container.GetInstance<Client>());
+            Application.Run(_container.GetInstance<Client>());
             //Application.Run(new Client());
         }
 
         private static void Bootstrap()
         {
             // Create the container as usual.
-            container = new Container();
+            _container = new Container();
 
             // Register your types, for instance:
-            container.Register<TranslatorContext>(Lifestyle.Singleton);
-            container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
-            container.Register<ITypeService, TypeService>(Lifestyle.Singleton);
-            container.Register<IExcelService, ExcelService>(Lifestyle.Singleton);
-            container.Register<ITxtService, TxtService>(Lifestyle.Singleton);
-            container.Register<Client>(Lifestyle.Singleton);
+            _container.Register<TranslatorContext>(Lifestyle.Singleton);
+            _container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
+            _container.Register<ITypeService, TypeService>(Lifestyle.Singleton);
+            _container.Register<IExcelService, ExcelService>(Lifestyle.Singleton);
+            _container.Register<ITxtService, TxtService>(Lifestyle.Singleton);
+            _container.Register<Client>(Lifestyle.Singleton);
 
             // Optionally verify the container.
-            container.Verify();
+            _container.Verify();
         }
     }
 }

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Translator.Core.IServices;
 using Translator.Core.Models;
@@ -25,18 +18,18 @@ namespace Translator.Admin
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            Core.Models.Dictionary dictionary = new Core.Models.Dictionary();
-            
-            dictionary.JP = txt_jp.Text;
-            dictionary.VN = txt_vn.Text;
-            dictionary.CategoryId = int.Parse(cbb_category.SelectedValue.ToString());
-            dictionary.Priority = short.Parse(txt_priority.Text);
-            dictionary.Inputer = txt_inputer.Text;
-            dictionary.TypeId = short.Parse(cbb_data_type.SelectedValue.ToString());
-            dictionary.DictionaryTypeId = short.Parse(cbb_translate_type.SelectedValue.ToString());
-            if(txt_id.Text != null)
+            Dictionary dictionary = new Dictionary
             {
-                int? id = int.Parse(txt_id.Text);
+                JP = txt_jp.Text,
+                VN = txt_vn.Text,
+                CategoryId = int.Parse(cbb_category.SelectedValue.ToString()),
+                Priority = short.Parse(txt_priority.Text),
+                Inputer = txt_inputer.Text,
+                TypeId = short.Parse(cbb_data_type.SelectedValue.ToString()),
+                DictionaryTypeId = short.Parse(cbb_translate_type.SelectedValue.ToString())
+            };
+            if (txt_id.Text != null)
+            {
                 dictionary.Id = int.Parse(txt_id.Text);
                 _dictionaryService.Update(dictionary);
             }

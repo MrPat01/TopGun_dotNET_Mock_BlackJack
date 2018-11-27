@@ -123,4 +123,7 @@
   <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>157, 17</value>
   </metadata>
+  <data name="Client_btn_BrowseFile_Click_All_Files____txt____xlsx____txt____xlsx" xml:space="preserve">
+    <value>All Files (*.txt, *.xlsx)|*.txt; *.xlsx</value>
+  </data>
 </root>

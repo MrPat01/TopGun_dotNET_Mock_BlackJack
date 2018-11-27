@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Translator.Core.Common;
 using Translator.Core.IServices;
@@ -19,27 +13,27 @@ namespace Translator.Server
     {
         private readonly IExcelService _excelService;
         private readonly ITxtService _txtService;
-        private readonly Core.IServices.IConfigPathService _configPathService;
-        public Server(Core.IServices.IConfigPathService ConfigPathService, IExcelService excelService, ITxtService txtService)
+        private readonly IConfigPathService _configPathService;
+        public Server(IConfigPathService configPathService, IExcelService excelService, ITxtService txtService)
         {
-            _configPathService = ConfigPathService;
+            _configPathService = configPathService;
             _excelService = excelService;
             _txtService = txtService;
             InitializeComponent();
-            this.Text = "Black Jack - Server -v01.00";
+            //Text = "Black Jack - Server -v01.00";
         }
 
         private void Server_Load(object sender, EventArgs e)
         {
             var configPath = _configPathService.GetAll().ToList();
-            txt_JP_Input.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNInput").Path;
-            txt_JP_BackUp.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNBackUp").Path;
-            txt_JP_Output.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNOutput").Path;
-            txt_JP_Error.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNError").Path;
-            txt_VN_Input.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPInput").Path;
-            txt_VN_Backup.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPBackUp").Path;
-            txt_VN_Output.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPOutput").Path;
-            txt_VN_Error.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPError").Path;
+            txt_JP_Input.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNInput")?.Path;
+            txt_JP_BackUp.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNBackUp")?.Path;
+            txt_JP_Output.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNOutput")?.Path;
+            txt_JP_Error.Text = configPath.FirstOrDefault(x => x.Name == "JP2VNError")?.Path;
+            txt_VN_Input.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPInput")?.Path;
+            txt_VN_Backup.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPBackUp")?.Path;
+            txt_VN_Output.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPOutput")?.Path;
+            txt_VN_Error.Text = configPath.FirstOrDefault(x => x.Name == "VN2JPError")?.Path;
         }
 
         private void btn_JP_Input_Click(object sender, EventArgs e)
@@ -123,42 +117,42 @@ namespace Translator.Server
         }
         public void AutoTranslate()
         {
-            if (checkFileNew())
+            if (CheckFileNew())
             {
-                AutoTranslateVN2JP();
-                AutoTranslateJP2VN();
+                AutoTranslateVn2Jp();
+                AutoTranslateJp2Vn();
             }
         }
-        public bool checkFileNew()
+        public bool CheckFileNew()
         {
             //get folder path
-            string folderVNOutPut = txt_VN_Output.Text;
-            string folderVNInPut = txt_VN_Input.Text;
-            string folderJPOutPut = txt_JP_Output.Text;
-            string folderJPInPut = txt_JP_Input.Text;
+            string folderVnOutPut = txt_VN_Output.Text;
+            string folderVnInPut = txt_VN_Input.Text;
+            string folderJpOutPut = txt_JP_Output.Text;
+            string folderJpInPut = txt_JP_Input.Text;
             //get file name order by ASC
-            var fileInFolderVNOutPut = Directory.EnumerateFiles(folderVNOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
-            var fileInFolderVNInPut = Directory.EnumerateFiles(folderVNInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
-            var fileInFolderJPOutPut = Directory.EnumerateFiles(folderJPOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
-            var fileInFolderJPInPut = Directory.EnumerateFiles(folderJPInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+            var fileInFolderVnOutPut = Directory.EnumerateFiles(folderVnOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+            var fileInFolderVnInPut = Directory.EnumerateFiles(folderVnInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+            var fileInFolderJpOutPut = Directory.EnumerateFiles(folderJpOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+            var fileInFolderJpInPut = Directory.EnumerateFiles(folderJpInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
             //check new file
-            if (fileInFolderVNOutPut.Count != fileInFolderVNInPut.Count || fileInFolderJPOutPut.Count == fileInFolderJPInPut.Count)
+            if (fileInFolderVnOutPut.Count != fileInFolderVnInPut.Count || fileInFolderJpOutPut.Count == fileInFolderJpInPut.Count)
                 return true;
-            if (fileInFolderVNOutPut.Count == fileInFolderVNInPut.Count)
+            if (fileInFolderVnOutPut.Count == fileInFolderVnInPut.Count)
             {
-                for (int i = 0; i < fileInFolderVNOutPut.Count; i++)
+                for (int i = 0; i < fileInFolderVnOutPut.Count; i++)
                 {
-                    if (fileInFolderVNOutPut[i] != fileInFolderVNInPut[i].Replace(".txt", "_VN.txt"))
+                    if (fileInFolderVnOutPut[i] != fileInFolderVnInPut[i].Replace(".txt", "_VN.txt"))
                     {
                         return true;
                     }
                 }
             }
-            if (fileInFolderJPOutPut.Count == fileInFolderJPInPut.Count)
+            if (fileInFolderJpOutPut.Count == fileInFolderJpInPut.Count)
             {
-                for (int i = 0; i < fileInFolderJPOutPut.Count; i++)
+                for (int i = 0; i < fileInFolderJpOutPut.Count; i++)
                 {
-                    if (fileInFolderJPOutPut[i] != fileInFolderJPInPut[i].Replace(".txt", "_JP.txt"))
+                    if (fileInFolderJpOutPut[i] != fileInFolderJpInPut[i].Replace(".txt", "_JP.txt"))
                     {
                         return true;
                     }
@@ -166,7 +160,7 @@ namespace Translator.Server
             }
             return false;
         }
-        public void AutoTranslateVN2JP()
+        public void AutoTranslateVn2Jp()
         {
             string pathInput = txt_VN_Input.Text;
             string pathOutput = txt_VN_Output.Text;
@@ -195,7 +189,7 @@ namespace Translator.Server
                 _txtService.Translate(file, newPath, TranslateType.Vn2Jp);
             }
         }
-        public void AutoTranslateJP2VN()
+        public void AutoTranslateJp2Vn()
         {
             string pathInput = txt_JP_Input.Text;
             string pathOutput = txt_JP_Output.Text;
@@ -227,10 +221,10 @@ namespace Translator.Server
 
         private void btn_Run_Click(object sender, EventArgs e)
         {
-            Timer MyTimer = new Timer();
-            MyTimer.Interval = Constants.refresh_time; 
-            MyTimer.Tick += new EventHandler(MyTimer_Tick);
-            MyTimer.Start();
+            Timer myTimer = new Timer();
+            myTimer.Interval = Constants.RefreshTime; 
+            myTimer.Tick += MyTimer_Tick;
+            myTimer.Start();
         }
 
         private void MyTimer_Tick(object sender, EventArgs e)
