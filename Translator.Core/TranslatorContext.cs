@@ -35,9 +35,8 @@ namespace Translator.Core
         public virtual DbSet<Field> Field { get; set; }
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Models.Type> Type { get; set; }
+        public virtual DbSet<TranslateFail> TranslateFail { get; set; }
         
-
-
     }
 
     //public class MyEntity
