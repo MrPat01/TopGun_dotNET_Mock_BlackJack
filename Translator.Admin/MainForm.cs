@@ -119,6 +119,17 @@ namespace Translator.Admin
             }
 
             IQueryable<Dictionary> query = _dictionaryService.GetAll().Where(predicate, parameterList);
+            GridData.DataSource = query.Select(x => new
+            {
+                x.Id,
+                x.VN,
+                x.VNLength,
+                x.JP,
+                x.JPLength,
+                x.TypeId,
+                x.DictionaryTypeId,
+                x.Date,
+            }).ToList();
         }
         private void btn_add_new_Click(object sender, EventArgs e)
         {
