@@ -15,7 +15,7 @@ namespace Translator.Admin
         private const string DeleteMessage = "Confirm delete!!!";
         private static string _confirmMessage = "Do you want to delete?";
         private const string Success = "Delete success!!!";
-        public static Dictionary Dictionary = new Dictionary();
+        public static Dictionary dictionary = new Dictionary();
         private readonly IDictionaryService _dictionaryService;
         private readonly List<SearchBox> _listSearchBox;
 
@@ -119,10 +119,10 @@ namespace Translator.Admin
             GridData.DataSource = query.Select(x => new
             {
                 x.Id,
-                x.VN,
-                x.VNLength,
-                x.JP,
-                x.JPLength,
+                x.Vn,
+                x.VnLength,
+                x.Jp,
+                x.JpLength,
                 x.TypeId,
                 x.DictionaryTypeId,
                 x.Date,
