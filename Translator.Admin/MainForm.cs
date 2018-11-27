@@ -5,26 +5,25 @@ using System.Drawing;
 using System.Linq;
 using System.Linq.Dynamic;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Translator.Core.Models;
-using Translator.Core.Services;
-using DynamicExpression = System.Linq.Dynamic.DynamicExpression;
 
 namespace Translator.Admin
 {
     public partial class MainForm : Form
     {
-        public static Core.Models.Dictionary dictionary = new Core.Models.Dictionary();
+        private const string DeleteMessage = "Confirm delete!!!";
+        private static string _confirmMessage = "Do you want to delete?";
+        private const string Success = "Delete success!!!";
+        public static Dictionary Dictionary = new Dictionary();
         private readonly IDictionaryService _dictionaryService;
-        private readonly List<SearchBox> listSearchBox;
+        private readonly List<SearchBox> _listSearchBox;
 
         public MainForm(IDictionaryService dictionaryService)
         {
             _dictionaryService = dictionaryService;
             InitializeComponent();
-            listSearchBox = new List<SearchBox>
+            _listSearchBox = new List<SearchBox>
             {
                 searchBox1,
                 searchBox2,
@@ -44,10 +43,10 @@ namespace Translator.Admin
             GridData.DataSource = _dictionaryService.GetAll().Select(x => new
             {
                 x.Id,
-                x.VN,
-                x.VNLength,
-                x.JP,
-                x.JPLength,
+                VN = x.Vn,
+                VNLength = x.VnLength,
+                JP = x.Jp,
+                JPLength = x.JpLength,
                 x.TypeId,
                 x.DictionaryTypeId,
                 x.Date,
@@ -58,7 +57,7 @@ namespace Translator.Admin
 
         private void btn_delete_data_Click(object sender, EventArgs e)
         {
-            var confirmDelete = MessageBox.Show("Do you want to delete?", "Confirm delete!!!", MessageBoxButtons.YesNo);
+            var confirmDelete = MessageBox.Show(_confirmMessage, DeleteMessage, MessageBoxButtons.YesNo);
             if (confirmDelete == DialogResult.Yes)
             {
                 var cellSelected = GridData.SelectedRows;
@@ -69,14 +68,14 @@ namespace Translator.Admin
                     _dictionaryService.Delete(id);
                 }
 
-                MessageBox.Show("Delete success!!!");
+                MessageBox.Show(Success);
                 GridData.DataSource = _dictionaryService.GetAll().Select(x => new
                 {
                     x.Id,
-                    x.VN,
-                    x.VNLength,
-                    x.JP,
-                    x.JPLength,
+                    VN = x.Vn,
+                    VNLength = x.VnLength,
+                    JP = x.Jp,
+                    JPLength = x.JpLength,
                     x.TypeId,
                     x.DictionaryTypeId,
                     x.Date,
@@ -104,7 +103,7 @@ namespace Translator.Admin
             var parameterList = new List<Expression<Func<Dictionary, bool>>>();
             int parameterIndex = 0;
 
-            foreach (var searchBox in listSearchBox)
+            foreach (var searchBox in _listSearchBox)
             {
                 var expression = searchBox.GetExpression();
                 var andOr = searchBox.GetAndOr();
@@ -131,7 +130,7 @@ namespace Translator.Admin
         }
         private void btn_add_new_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(_dictionaryService, new Core.Models.Dictionary());
+            EditForm editForm = new EditForm(_dictionaryService, new Dictionary());
             editForm.Show();
         }
 

@@ -5,6 +5,6 @@
         public string Field { get; set; }
         public string Operation { get; set; }
         public string Value { get; set; }
-        public bool DESC { get; set; }
+        public bool Desc { get; set; }
     }
 }

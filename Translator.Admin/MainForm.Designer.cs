@@ -248,7 +248,7 @@
             this.Controls.Add(this.btn_add_new);
             this.Controls.Add(this.btn_delete_data);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            MainForm._confirmMessage = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -268,7 +268,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private SearchBox searchBox10;
         private SearchBox searchBox9;
         private SearchBox searchBox8;

@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using OfficeOpenXml;
 using Translator.Core.Common;
 using Translator.Core.IServices;
 
@@ -23,10 +19,10 @@ namespace Translator.Core.Services
         {
             string readText = File.ReadAllText(inputPath);
 
-            var SplitReadText = readText.Split('.');
+            var splitReadText = readText.Split('.');
             string createText = "";
 
-            foreach (var item in SplitReadText)
+            foreach (var item in splitReadText)
             {
                 if (string.IsNullOrWhiteSpace(item))
                 {
@@ -36,7 +32,7 @@ namespace Translator.Core.Services
                 text += ".";
                 //translate here
 
-                if (item.IndexOf("\n") > 0)
+                if (item.IndexOf("\n", StringComparison.Ordinal) > 0)
                 {
                     createText += Environment.NewLine + _dictionaryService.TranslateText(text, type);
                 }

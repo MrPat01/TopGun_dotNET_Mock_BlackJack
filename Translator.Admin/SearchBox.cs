@@ -22,7 +22,7 @@ namespace Translator.Admin
         public SearchBox()
         {
             InitializeComponent();
-            _fieldService = Program.container.GetInstance<IFieldService>();
+            _fieldService = Program.Container.GetInstance<IFieldService>();
             SetComboBoxData();
         }
 

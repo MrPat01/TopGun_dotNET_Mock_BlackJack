@@ -9,7 +9,7 @@ namespace Translator.Admin
 {
     static class Program
     {
-        public static Container container;
+        public static Container Container;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -20,26 +20,26 @@ namespace Translator.Admin
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new MainForm());
             Bootstrap();
-            Application.Run(container.GetInstance<MainForm>());
+            Application.Run(Container.GetInstance<MainForm>());
         }
         private static void Bootstrap()
         {
             // Create the container as usual.
-            container = new Container();
+            Container = new Container();
 
             // Register your types, for instance:
-            container.Register<TranslatorContext>(Lifestyle.Singleton);
-            container.Register(typeof(IRepository<>), typeof(Repository<>), Lifestyle.Singleton);
-            container.Register<ITranslateFailService, TranslateFailService>(Lifestyle.Singleton);
-            container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
-            container.Register<IFieldService, FieldService>(Lifestyle.Singleton);
-            container.Register<ITypeService, TypeService>(Lifestyle.Singleton);
-            container.Register<IExcelService, ExcelService>(Lifestyle.Singleton);
-            container.Register<ITxtService, TxtService>(Lifestyle.Singleton);
-            container.Register<MainForm>(Lifestyle.Singleton);
+            Container.Register<TranslatorContext>(Lifestyle.Singleton);
+            Container.Register(typeof(IRepository<>), typeof(Repository<>), Lifestyle.Singleton);
+            Container.Register<ITranslateFailService, TranslateFailService>(Lifestyle.Singleton);
+            Container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
+            Container.Register<IFieldService, FieldService>(Lifestyle.Singleton);
+            Container.Register<ITypeService, TypeService>(Lifestyle.Singleton);
+            Container.Register<IExcelService, ExcelService>(Lifestyle.Singleton);
+            Container.Register<ITxtService, TxtService>(Lifestyle.Singleton);
+            Container.Register<MainForm>(Lifestyle.Singleton);
 
             // Optionally verify the container.
-            container.Verify();
+            Container.Verify();
         }
     }
 }
