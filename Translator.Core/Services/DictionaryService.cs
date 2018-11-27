@@ -21,23 +21,23 @@ namespace Translator.Core.Services
         }
         public Dictionary TranslateVn2Jp(string input)
         {
-            var model = GetAll().Where(x => x.VN == input).FirstOrDefault();
+            var model = GetAll().Where(x => x.Vn == input).FirstOrDefault();
             if (model != null)
                 return model;
             else
             {
-                _ITranslateFailService.AddNew(new TranslateFail { Text = input, typeId = TranslateType.Vn2Jp });
+                _ITranslateFailService.AddNew(new TranslateFail { Text = input, TypeId = TranslateType.Vn2Jp });
                 return new Dictionary();
             }
         }
         public Dictionary TranslateJp2Vn(string input)
         {
-            var model = GetAll().Where(x => x.JP == input).FirstOrDefault();
+            var model = GetAll().Where(x => x.Jp == input).FirstOrDefault();
             if (model != null)
                 return model;
             else
             {
-                _ITranslateFailService.AddNew(new TranslateFail { Text = input, typeId = TranslateType.Jp2Vn });
+                _ITranslateFailService.AddNew(new TranslateFail { Text = input, TypeId = TranslateType.Jp2Vn });
                 return new Dictionary();
             }
         }
@@ -62,9 +62,9 @@ namespace Translator.Core.Services
             switch (type)
             {
                 case TranslateType.Jp2Vn:
-                    return TranslateJp2Vn(text)?.VN ?? text;
+                    return TranslateJp2Vn(text)?.Vn ?? text;
                 case TranslateType.Vn2Jp:
-                    return TranslateVn2Jp(text)?.JP ?? text;
+                    return TranslateVn2Jp(text)?.Jp ?? text;
                 default:
                     return text;
             }

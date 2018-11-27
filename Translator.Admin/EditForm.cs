@@ -20,8 +20,8 @@ namespace Translator.Admin
         {
             Dictionary dictionary = new Dictionary
             {
-                JP = txt_jp.Text,
-                VN = txt_vn.Text,
+                Jp = txt_jp.Text,
+                Vn = txt_vn.Text,
                 CategoryId = int.Parse(cbb_category.SelectedValue.ToString()),
                 Priority = short.Parse(txt_priority.Text),
                 Inputer = txt_inputer.Text,
@@ -41,8 +41,8 @@ namespace Translator.Admin
 
         private void EditForm_Load(object sender, EventArgs e)
         {
-            txt_jp.Text = _dictionary.JP;
-            txt_vn.Text = _dictionary.VN;
+            txt_jp.Text = _dictionary.Jp;
+            txt_vn.Text = _dictionary.Vn;
             cbb_category.SelectedValue = _dictionary.CategoryId;
             txt_priority.Text = _dictionary.Priority.ToString();
             txt_inputer.Text = _dictionary.Inputer;

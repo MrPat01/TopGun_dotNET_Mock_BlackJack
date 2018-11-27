@@ -67,15 +67,15 @@ namespace Translator.Client
         private void btn_VN2JP_Click(object sender, EventArgs e)
         {
             var text = txt_VN.Text;
-            var TranslatedText = _dictionaryService.TranslateVn2Jp(text);
-            txt_JP.Text = TranslatedText.JP;
+            var translatedText = _dictionaryService.TranslateVn2Jp(text);
+            txt_JP.Text = translatedText.Jp;
         }
 
         private void btn_JP2VN_Click(object sender, EventArgs e)
         {
             var text = txt_JP.Text;
-            var TranslatedText = _dictionaryService.TranslateJp2Vn(text);
-            txt_VN.Text = TranslatedText.VN;
+            var translatedText = _dictionaryService.TranslateJp2Vn(text);
+            txt_VN.Text = translatedText.Vn;
         }
 
         private void btn_translateFile_Click(object sender, EventArgs e)
@@ -85,12 +85,12 @@ namespace Translator.Client
 
             if (!string.IsNullOrWhiteSpace(path))
             {
-                if (path.IndexOf(".txt") != -1)
+                if (path.IndexOf(".txt", StringComparison.Ordinal) != -1)
                 {
                     string newPath = path.Replace(".xlsx", "_JP.xlsx");
                     _txtService.Translate(path, newPath, type);
                 }
-                else if (path.IndexOf(".xlsx") != -1)
+                else if (path.IndexOf(".xlsx", StringComparison.Ordinal) != -1)
                 {
                     string newPath = path.Replace(".xlsx", "_JP.xlsx");
                     _excelService.Translate(path, newPath, type);
