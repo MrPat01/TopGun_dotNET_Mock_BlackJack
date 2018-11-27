@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="Common\Utility.cs" />
     <Compile Include="Filter\DictionaryFilter.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="IRepository.cs" />
@@ -69,7 +68,6 @@
     <Compile Include="IServices\IExcelService.cs" />
     <Compile Include="IServices\IFieldService.cs" />
     <Compile Include="IServices\ITypeService.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ConfigPath.cs" />
     <Compile Include="Models\Dictionary.cs" />
@@ -87,6 +85,7 @@
     <Compile Include="Services\TypeService.cs" />
     <Compile Include="Services\ExcelService.cs" />
     <Compile Include="TranslatorContext.cs" />
+    <Compile Include="TranslatorInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -95,7 +94,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Migration.txt" />
+    <Content Include="Data\Categories.sql" />
+    <Content Include="Data\ConfigPaths.sql" />
+    <Content Include="Data\Dictionaries.sql" />
+    <Content Include="Data\Fields.sql" />
+    <Content Include="Data\TranslateFails.sql" />
+    <Content Include="Data\Types.sql" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
