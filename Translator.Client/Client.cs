@@ -22,6 +22,9 @@ namespace Translator.Client
             _excelService = excelService;
             _txtService = txtService;
             InitializeComponent();
+
+            backgroundWorker1.WorkerReportsProgress = true;
+            backgroundWorker1.WorkerSupportsCancellation = true;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -66,23 +69,32 @@ namespace Translator.Client
 
         private void btn_VN2JP_Click(object sender, EventArgs e)
         {
+            this.backgroundWorker1.ReportProgress(0, "Starting");
             var text = txt_VN.Text;
+            this.backgroundWorker1.ReportProgress(50, "Loading");
             var translatedText = _dictionaryService.TranslateVn2Jp(text);
             txt_JP.Text = translatedText.Jp;
+            this.backgroundWorker1.ReportProgress(100, "Completed");
         }
+
+
 
         private void btn_JP2VN_Click(object sender, EventArgs e)
         {
+            this.backgroundWorker1.ReportProgress(0, "Starting");
+            this.backgroundWorker1.ReportProgress(10, "Running");
             var text = txt_JP.Text;
+            this.backgroundWorker1.ReportProgress(50, "Loading");
             var translatedText = _dictionaryService.TranslateJp2Vn(text);
             txt_VN.Text = translatedText.Vn;
+            this.backgroundWorker1.ReportProgress(100, "Completed");
         }
 
         private void btn_translateFile_Click(object sender, EventArgs e)
         {
             string path = txt_FilePath.Text;
             var type = (TranslateType)cbb_type.SelectedValue;
-
+            this.backgroundWorker1.ReportProgress(0, "Starting");
             if (!string.IsNullOrWhiteSpace(path))
             {
                 if (path.IndexOf(".txt", StringComparison.Ordinal) != -1)
@@ -95,6 +107,7 @@ namespace Translator.Client
                     string newPath = path.Replace(".xlsx", "_JP.xlsx");
                     _excelService.Translate(path, newPath, type);
                 }
+                this.backgroundWorker1.ReportProgress(100, "Completed");
             }
         }
 
@@ -108,13 +121,32 @@ namespace Translator.Client
             foreach (var file in excelFiles)
             {
                 string newPath = file.Replace(".xlsx", "_JP.xlsx");
-                _excelService.Translate(file, newPath,  type);
+                _excelService.Translate(file, newPath, type);
             }
             foreach (var file in txtFiles)
             {
                 string newPath = file.Replace(".txt", "_JP.txt");
                 _txtService.Translate(file, newPath, type);
             }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            if (e.Cancelled == true)
+            {
+            }
+            else if (e.Error != null)
+            {
+            }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+
+            string temp = (string)e.UserState;
+            this.progressBar.Value = (this.progressBar.Value + e.ProgressPercentage) > 100 ? e.ProgressPercentage : this.progressBar.Value + e.ProgressPercentage;
+            //resultLabel.Text = (this.progressBar.Value.ToString() + "%");
+            //this.userState.Text = temp;
         }
     }
 }
