@@ -118,19 +118,20 @@ namespace Translator.Server
         }
         public void AutoTranslate()
         {
-            if (CheckFileNew())
+            if (NewfileVN2Jp())
             {
                 AutoTranslateVn2Jp();
+            }
+            if (NewfileJp2VN())
+            {
                 AutoTranslateJp2Vn();
             }
         }
-        public bool CheckFileNew()
+        public bool NewfileVN2Jp()
         {
             //get folder path
             string folderVnOutPut = txt_VN_Output.Text;
             string folderVnInPut = txt_VN_Input.Text;
-            string folderJpOutPut = txt_JP_Output.Text;
-            string folderJpInPut = txt_JP_Input.Text;
             //check folder exist
             if (!File.Exists(folderVnOutPut))
             {
@@ -140,44 +141,108 @@ namespace Translator.Server
             {
                 Directory.CreateDirectory(folderVnInPut);
             }
-            if (!File.Exists(folderJpOutPut))
-            {
-                Directory.CreateDirectory(folderJpOutPut);
-            }
-            if (!File.Exists(folderJpInPut))
-            {
-                Directory.CreateDirectory(folderJpInPut);
-            }
             //get file name order by ASC
-            var fileInFolderVnOutPut = Directory.EnumerateFiles(folderVnOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
-            var fileInFolderVnInPut = Directory.EnumerateFiles(folderVnInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
-            var fileInFolderJpOutPut = Directory.EnumerateFiles(folderJpOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
-            var fileInFolderJpInPut = Directory.EnumerateFiles(folderJpInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
-            //check new file
-            if (fileInFolderVnOutPut.Count != fileInFolderVnInPut.Count || fileInFolderJpOutPut.Count == fileInFolderJpInPut.Count)
-                return true;
-            if (fileInFolderVnOutPut.Count == fileInFolderVnInPut.Count)
+            var fileInFolderVnOutPut = Directory.EnumerateFiles(folderVnOutPut, "*.txt; *.xlsx;").ToList();
+            var fileInFolderVnInPut = Directory.EnumerateFiles(folderVnInPut, "*.txt; *.xlsx;").ToList();
+            var filesInputTemp = Directory.EnumerateFiles(folderVnInPut, "*.txt; *.xlsx;").ToList();
+
+            //remove file has been translated
+            foreach (var item in fileInFolderVnInPut)
             {
-                for (int i = 0; i < fileInFolderVnOutPut.Count; i++)
+                var file = item.EndsWith("txt") ? item.Replace(".txt", "_JP.txt") : item.EndsWith("xlsx") ? item.Replace(".xlsx", "_JP.xlsx") : item;
+                if (fileInFolderVnOutPut.Contains(file))
                 {
-                    if (fileInFolderVnOutPut[i] != fileInFolderVnInPut[i].Replace(".txt", "_VN.txt"))
-                    {
-                        return true;
-                    }
+                    filesInputTemp.Remove(item);
                 }
             }
-            if (fileInFolderJpOutPut.Count == fileInFolderJpInPut.Count)
-            {
-                for (int i = 0; i < fileInFolderJpOutPut.Count; i++)
-                {
-                    if (fileInFolderJpOutPut[i] != fileInFolderJpInPut[i].Replace(".txt", "_JP.txt"))
-                    {
-                        return true;
-                    }
-                }
-            }
+            if (filesInputTemp.Count > 0) return true;
             return false;
         }
+        public bool NewfileJp2VN()
+        {
+            //get folder path
+            string folderJPOutPut = txt_JP_Output.Text;
+            string folderJPInPut = txt_JP_Input.Text;
+            //check folder exist
+            if (!File.Exists(folderJPOutPut))
+            {
+                Directory.CreateDirectory(folderJPOutPut);
+            }
+            if (!File.Exists(folderJPInPut))
+            {
+                Directory.CreateDirectory(folderJPInPut);
+            }
+            //get file name order by ASC
+            var fileInFolderVnOutPut = Directory.EnumerateFiles(folderJPOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+            var fileInFolderVnInPut = Directory.EnumerateFiles(folderJPInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+            var filesInputTemp = Directory.EnumerateFiles(folderJPInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+
+            //remove file has been translated
+            foreach (var item in fileInFolderVnInPut)
+            {
+                var file = item.EndsWith("txt") ? item.Replace(".txt", "_VN.txt") : item.EndsWith("xlsx") ? item.Replace(".xlsx", "_VN.xlsx") : item;
+                if (fileInFolderVnOutPut.Contains(file))
+                {
+                    filesInputTemp.Remove(item);
+                }
+            }
+            if (filesInputTemp.Count > 0) return true;
+            return false;
+        }
+        //public bool CheckFileNew()
+        //{
+        //    //get folder path
+        //    string folderVnOutPut = txt_VN_Output.Text;
+        //    string folderVnInPut = txt_VN_Input.Text;
+        //    string folderJpOutPut = txt_JP_Output.Text;
+        //    string folderJpInPut = txt_JP_Input.Text;
+        //    //check folder exist
+        //    if (!File.Exists(folderVnOutPut))
+        //    {
+        //        Directory.CreateDirectory(folderVnOutPut);
+        //    }
+        //    if (!File.Exists(folderVnInPut))
+        //    {
+        //        Directory.CreateDirectory(folderVnInPut);
+        //    }
+        //    if (!File.Exists(folderJpOutPut))
+        //    {
+        //        Directory.CreateDirectory(folderJpOutPut);
+        //    }
+        //    if (!File.Exists(folderJpInPut))
+        //    {
+        //        Directory.CreateDirectory(folderJpInPut);
+        //    }
+        //    //get file name order by ASC
+        //    var fileInFolderVnOutPut = Directory.EnumerateFiles(folderVnOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+        //    var fileInFolderVnInPut = Directory.EnumerateFiles(folderVnInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+        //    var fileInFolderJpOutPut = Directory.EnumerateFiles(folderJpOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+        //    var fileInFolderJpInPut = Directory.EnumerateFiles(folderJpInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+        //    //check new file
+        //    if (fileInFolderVnOutPut.Count != fileInFolderVnInPut.Count || fileInFolderJpOutPut.Count == fileInFolderJpInPut.Count)
+        //        return true;
+        //    if (fileInFolderVnOutPut.Count == fileInFolderVnInPut.Count)
+        //    {
+        //        for (int i = 0; i < fileInFolderVnOutPut.Count; i++)
+        //        {
+        //            if (fileInFolderVnOutPut[i] != fileInFolderVnInPut[i].Replace(".txt", "_VN.txt"))
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    if (fileInFolderJpOutPut.Count == fileInFolderJpInPut.Count)
+        //    {
+        //        for (int i = 0; i < fileInFolderJpOutPut.Count; i++)
+        //        {
+        //            if (fileInFolderJpOutPut[i] != fileInFolderJpInPut[i].Replace(".txt", "_JP.txt"))
+        //            {
+        //                return true;
+        //            }
+        //        }
+        //    }
+        //    return false;
+        //}
         public void AutoTranslateVn2Jp()
         {
             string pathInput = txt_VN_Input.Text;
