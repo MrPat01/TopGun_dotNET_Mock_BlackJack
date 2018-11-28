@@ -248,7 +248,7 @@
             this.Controls.Add(this.btn_add_new);
             this.Controls.Add(this.btn_delete_data);
             this.Name = "MainForm";
-            MainForm._confirmMessage = "MainForm";
+            //MainForm._confirmMessage = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

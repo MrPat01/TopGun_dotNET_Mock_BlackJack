@@ -28,6 +28,10 @@ namespace Translator.Server
 
             // Register your types, for instance:
             _container.Register<TranslatorContext>(Lifestyle.Singleton);
+            _container.Register<ITranslateFailService, TranslateFailService>(Lifestyle.Singleton);
+            _container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
+            _container.Register<IExcelService, ExcelService>(Lifestyle.Singleton);
+            _container.Register<ITxtService, TxtService>(Lifestyle.Singleton);
             _container.Register<IConfigPathService, ConfigPathService>(Lifestyle.Singleton);
             _container.Register<Server>(Lifestyle.Singleton);
 

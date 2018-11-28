@@ -51,7 +51,7 @@ namespace Translator.Client
             result.Filter = V;
             if (result.ShowDialog() == DialogResult.OK)
             {
-                txt_FilePath.Text = openFileDialog1.FileName;
+                txt_FilePath.Text = result.FileName;
             }
         }
 
@@ -87,12 +87,32 @@ namespace Translator.Client
             {
                 if (path.IndexOf(".txt", StringComparison.Ordinal) != -1)
                 {
-                    string newPath = path.Replace(".xlsx", "_JP.xlsx");
+                    string newPath = string.Empty;
+                    switch (type)
+                    {
+                        case TranslateType.Jp2Vn:
+                            newPath = path.Replace(".txt", "_VN.txt");
+                            break;
+                        case TranslateType.Vn2Jp:
+                            newPath = path.Replace(".txt", "_JP.txt");
+                            break;
+
+                    }
                     _txtService.Translate(path, newPath, type);
                 }
                 else if (path.IndexOf(".xlsx", StringComparison.Ordinal) != -1)
                 {
-                    string newPath = path.Replace(".xlsx", "_JP.xlsx");
+                    string newPath = string.Empty;
+                    switch (type)
+                    {
+                        case TranslateType.Jp2Vn:
+                            newPath = path.Replace(".xlsx", "_VN.xlsx");
+                            break;
+                        case TranslateType.Vn2Jp:
+                            newPath = path.Replace(".xlsx", "_JP.xlsx");
+                            break;
+
+                    }
                     _excelService.Translate(path, newPath, type);
                 }
             }
@@ -107,12 +127,32 @@ namespace Translator.Client
             var txtFiles = files.Where(f => f.EndsWith(".txt"));
             foreach (var file in excelFiles)
             {
-                string newPath = file.Replace(".xlsx", "_JP.xlsx");
+                string newPath = string.Empty;
+                switch (type)
+                {
+                    case TranslateType.Jp2Vn:
+                        newPath = file.Replace(".xlsx", "_VN.xlsx");
+                        break;
+                    case TranslateType.Vn2Jp:
+                        newPath = file.Replace(".xlsx", "_JP.xlsx");
+                        break;
+
+                }
                 _excelService.Translate(file, newPath,  type);
             }
             foreach (var file in txtFiles)
             {
-                string newPath = file.Replace(".txt", "_JP.txt");
+                string newPath = string.Empty;
+                switch (type)
+                {
+                    case TranslateType.Jp2Vn:
+                        newPath = file.Replace(".txt", "_VN.txt");
+                        break;
+                    case TranslateType.Vn2Jp:
+                        newPath = file.Replace(".txt", "_JP.txt");
+                        break;
+
+                }
                 _txtService.Translate(file, newPath, type);
             }
         }

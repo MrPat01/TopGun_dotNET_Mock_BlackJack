@@ -32,6 +32,7 @@ namespace Translator.Admin
             Container.Register(typeof(IRepository<>), typeof(Repository<>), Lifestyle.Singleton);
             Container.Register<ITranslateFailService, TranslateFailService>(Lifestyle.Singleton);
             Container.Register<IDictionaryService, DictionaryService>(Lifestyle.Singleton);
+            Container.Register<ICategoryService, CategoryService>(Lifestyle.Singleton);
             Container.Register<IFieldService, FieldService>(Lifestyle.Singleton);
             Container.Register<ITypeService, TypeService>(Lifestyle.Singleton);
             Container.Register<IExcelService, ExcelService>(Lifestyle.Singleton);
