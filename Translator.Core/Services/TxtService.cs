@@ -29,7 +29,7 @@ namespace Translator.Core.Services
                     continue;
                 }
                 var text = item.Replace("\r", "").Replace("\n", "");
-                //text += ".";
+                text += ".";
                 //translate here
 
                 if (item.IndexOf("\n", StringComparison.Ordinal) > 0)

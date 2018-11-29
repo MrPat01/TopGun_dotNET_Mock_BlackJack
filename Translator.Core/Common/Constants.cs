@@ -50,8 +50,8 @@ namespace Translator.Core.Common
 
     public enum TranslateType
     {
-        Vn2Jp = 2,
-        Jp2Vn = 1
+        Vn2Jp,
+        Jp2Vn
     }
 
     public enum EnumType

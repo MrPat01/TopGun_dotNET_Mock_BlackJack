@@ -13,19 +13,15 @@ namespace Translator.Admin
     public partial class MainForm : Form
     {
         private const string DeleteMessage = "Confirm delete!!!";
-        private static string ConfirmMessage = "Do you want to delete?";
+        private static string _confirmMessage = "Do you want to delete?";
         private const string Success = "Delete success!!!";
         private static Dictionary _dictionary = new Dictionary();
         private readonly IDictionaryService _dictionaryService;
-        private readonly ICategoryService _categoryService;
-        private readonly ITypeService _typeService;
         private readonly List<SearchBox> _listSearchBox;
 
-        public MainForm(IDictionaryService dictionaryService, ICategoryService categoryService, ITypeService typeService)
+        public MainForm(IDictionaryService dictionaryService)
         {
             _dictionaryService = dictionaryService;
-            _categoryService = categoryService;
-            _typeService = typeService;
             InitializeComponent();
             _listSearchBox = new List<SearchBox>
             {
@@ -61,7 +57,7 @@ namespace Translator.Admin
 
         private void btn_delete_data_Click(object sender, EventArgs e)
         {
-            var confirmDelete = MessageBox.Show(ConfirmMessage, DeleteMessage, MessageBoxButtons.YesNo);
+            var confirmDelete = MessageBox.Show(_confirmMessage, DeleteMessage, MessageBoxButtons.YesNo);
             if (confirmDelete == DialogResult.Yes)
             {
                 var cellSelected = GridData.SelectedRows;
@@ -139,7 +135,7 @@ namespace Translator.Admin
         }
         private void btn_add_new_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, new Dictionary());
+            EditForm editForm = new EditForm(_dictionaryService, new Dictionary());
             editForm.Show();
         }
 

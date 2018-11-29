@@ -32,6 +32,7 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txt_JP = new System.Windows.Forms.TextBox();
             this.txt_VN = new System.Windows.Forms.TextBox();
@@ -56,8 +57,10 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -72,7 +75,6 @@
             this.label1.Size = new System.Drawing.Size(770, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = " [FPT Direct Marketing : VN - JP Translation Tool]";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // tabControl1
             // 
@@ -100,12 +102,20 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.progressBar);
             this.groupBox4.Location = new System.Drawing.Point(3, 330);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(750, 88);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Status";
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(12, 35);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(730, 23);
+            this.progressBar.TabIndex = 0;
             // 
             // groupBox3
             // 
@@ -327,7 +337,12 @@
             // 
             // openFileDialog1
             // 
-            //this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
             // Client
             // 
@@ -344,6 +359,7 @@
             this.Load += new System.EventHandler(this.Client_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -384,6 +400,8 @@
         public System.Windows.Forms.Button btn_BrowseFile;
         public System.Windows.Forms.Button btn_BrowseFolder;
         public System.Windows.Forms.ComboBox cbb_type;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

@@ -55,6 +55,7 @@ namespace Translator.Core
         public IQueryable<T> GetAll()
         {
             return _dbContext.Set<T>().Where(x=> !x.IsDeleted);
+
         }
 
         public T Update(T entity)

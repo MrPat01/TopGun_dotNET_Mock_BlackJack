@@ -22,15 +22,15 @@ namespace Translator.Core
 
             if (!context.ConfigPath.Any() && File.Exists(configPathsFile))
                 context.Database.ExecuteSqlCommand(File.ReadAllText(configPathsFile));
-            
+
+            if (!context.Dictionary.Any() && File.Exists(dictionariesFile))
+                context.Database.ExecuteSqlCommand(File.ReadAllText(dictionariesFile));
+
             if (!context.Field.Any() && File.Exists(fieldsFile))
                 context.Database.ExecuteSqlCommand(File.ReadAllText(fieldsFile));
 
             if (!context.Type.Any() && File.Exists(typesFile))
                 context.Database.ExecuteSqlCommand(File.ReadAllText(typesFile));
-
-            if (!context.Dictionary.Any() && File.Exists(dictionariesFile))
-                context.Database.ExecuteSqlCommand(File.ReadAllText(dictionariesFile));
 
             base.Seed(context);
         }
