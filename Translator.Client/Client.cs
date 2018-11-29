@@ -146,5 +146,10 @@ namespace Translator.Client
             string temp = (string)e.UserState;
             this.progressBar.Value = (this.progressBar.Value + e.ProgressPercentage) > 100 ? e.ProgressPercentage : this.progressBar.Value + e.ProgressPercentage;
         }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

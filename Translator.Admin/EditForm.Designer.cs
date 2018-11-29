@@ -329,6 +329,7 @@
             this.Controls.Add(this.btn_clear_data);
             this.Controls.Add(this.groupBox1);
             this.Name = "EditForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditForm";
             this.Load += new System.EventHandler(this.EditForm_Load);
             this.groupBox1.ResumeLayout(false);

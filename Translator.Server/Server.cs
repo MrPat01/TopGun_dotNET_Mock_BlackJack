@@ -326,5 +326,40 @@ namespace Translator.Server
         {
             AutoTranslate();
         }
+
+        private void btn_JP2VN_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_VN2JP_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_translateFolder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_translateFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_BrowseFolder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_BrowseFile_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

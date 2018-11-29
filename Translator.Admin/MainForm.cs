@@ -15,14 +15,18 @@ namespace Translator.Admin
         private const string DeleteMessage = "Confirm delete!!!";
         private static string _confirmMessage = "Do you want to delete?";
         private const string Success = "Delete success!!!";
-        private static Dictionary _dictionary = new Dictionary();
+        private readonly ICategoryService _categoryService;
+        private readonly ITypeService _typeService;
+        public static Dictionary dictionary = new Dictionary();
         private readonly IDictionaryService _dictionaryService;
         private readonly ICategoryService _categoryService;
         private readonly ITypeService _typeService;
         private readonly List<SearchBox> _listSearchBox;
 
-        public MainForm(IDictionaryService dictionaryService, ICategoryService categoryService, ITypeService typeService)
+        public MainForm(ICategoryService categoryService, ITypeService typeService, IDictionaryService dictionaryService)
         {
+            _categoryService = categoryService;
+            _typeService = typeService;
             _dictionaryService = dictionaryService;
             _categoryService = categoryService;
             _typeService = typeService;
