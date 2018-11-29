@@ -27,11 +27,6 @@ namespace Translator.Client
             backgroundWorker1.WorkerSupportsCancellation = true;
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void Client_Load(object sender, EventArgs e)
         {
             var type = _typeService.GetAll().ToList();
@@ -44,7 +39,6 @@ namespace Translator.Client
                 first = type1;
                 break;
             }
-
             if (first != null) cbb_type.SelectedValue = first.Id;
         }
 
@@ -71,8 +65,9 @@ namespace Translator.Client
         {
             this.backgroundWorker1.ReportProgress(0, "Starting");
             var text = txt_VN.Text;
-            this.backgroundWorker1.ReportProgress(50, "Loading");
+            this.backgroundWorker1.ReportProgress(10, "Loading");
             var translatedText = _dictionaryService.TranslateVn2Jp(text);
+            this.backgroundWorker1.ReportProgress(50, "Loading");
             txt_JP.Text = translatedText.Jp;
             this.backgroundWorker1.ReportProgress(100, "Completed");
         }
@@ -82,10 +77,10 @@ namespace Translator.Client
         private void btn_JP2VN_Click(object sender, EventArgs e)
         {
             this.backgroundWorker1.ReportProgress(0, "Starting");
-            this.backgroundWorker1.ReportProgress(10, "Running");
             var text = txt_JP.Text;
-            this.backgroundWorker1.ReportProgress(50, "Loading");
+            this.backgroundWorker1.ReportProgress(10, "Running");
             var translatedText = _dictionaryService.TranslateJp2Vn(text);
+            this.backgroundWorker1.ReportProgress(50, "Loading");
             txt_VN.Text = translatedText.Vn;
             this.backgroundWorker1.ReportProgress(100, "Completed");
         }
@@ -97,6 +92,7 @@ namespace Translator.Client
             this.backgroundWorker1.ReportProgress(0, "Starting");
             if (!string.IsNullOrWhiteSpace(path))
             {
+                this.backgroundWorker1.ReportProgress(10, "Running");
                 if (path.IndexOf(".txt", StringComparison.Ordinal) != -1)
                 {
                     string newPath = path.Replace(".xlsx", "_JP.xlsx");
@@ -107,17 +103,21 @@ namespace Translator.Client
                     string newPath = path.Replace(".xlsx", "_JP.xlsx");
                     _excelService.Translate(path, newPath, type);
                 }
-                this.backgroundWorker1.ReportProgress(100, "Completed");
+                this.backgroundWorker1.ReportProgress(50, "Loading");
             }
+            this.backgroundWorker1.ReportProgress(100, "Completed");
         }
 
         private void btn_translateFolder_Click(object sender, EventArgs e)
         {
+            this.backgroundWorker1.ReportProgress(0, "Starting");
             var type = (TranslateType)cbb_type.SelectedValue;
             string path = txt_FolderPath.Text;
             var files = Directory.GetFiles(path);
+            this.backgroundWorker1.ReportProgress(10, "Running");
             var excelFiles = files.Where(f => f.EndsWith(".xlsx"));
             var txtFiles = files.Where(f => f.EndsWith(".txt"));
+            this.backgroundWorker1.ReportProgress(50, "Loading");
             foreach (var file in excelFiles)
             {
                 string newPath = file.Replace(".xlsx", "_JP.xlsx");
@@ -128,6 +128,7 @@ namespace Translator.Client
                 string newPath = file.Replace(".txt", "_JP.txt");
                 _txtService.Translate(file, newPath, type);
             }
+            this.backgroundWorker1.ReportProgress(100, "Completed");
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -145,8 +146,6 @@ namespace Translator.Client
 
             string temp = (string)e.UserState;
             this.progressBar.Value = (this.progressBar.Value + e.ProgressPercentage) > 100 ? e.ProgressPercentage : this.progressBar.Value + e.ProgressPercentage;
-            //resultLabel.Text = (this.progressBar.Value.ToString() + "%");
-            //this.userState.Text = temp;
         }
     }
 }
