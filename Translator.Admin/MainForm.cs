@@ -17,11 +17,15 @@ namespace Translator.Admin
         private const string Success = "Delete success!!!";
         private static Dictionary _dictionary = new Dictionary();
         private readonly IDictionaryService _dictionaryService;
+        private readonly ICategoryService _categoryService;
+        private readonly ITypeService _typeService;
         private readonly List<SearchBox> _listSearchBox;
 
-        public MainForm(IDictionaryService dictionaryService)
+        public MainForm(IDictionaryService dictionaryService, ICategoryService categoryService, ITypeService typeService)
         {
             _dictionaryService = dictionaryService;
+            _categoryService = categoryService;
+            _typeService = typeService;
             InitializeComponent();
             _listSearchBox = new List<SearchBox>
             {
@@ -135,14 +139,15 @@ namespace Translator.Admin
         }
         private void btn_add_new_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(_dictionaryService, new Dictionary());
+            EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, new Dictionary());
             editForm.Show();
         }
 
         private void GridData_DoubleClick(object sender, EventArgs e)
         {
-            var cell = GridData.CurrentCell.Value;
-            _dictionary = _dictionaryService.GetByKey((int)cell);
+            var rowIndex = GridData.CurrentRow.Index;
+            var Id = GridData.Rows[rowIndex].Cells[1].Value;
+            _dictionary = _dictionaryService.GetByKey((int)Id);
             EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, _dictionary);
             editForm.Show();
         }
