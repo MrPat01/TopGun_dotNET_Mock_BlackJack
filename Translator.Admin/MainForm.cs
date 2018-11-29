@@ -17,10 +17,8 @@ namespace Translator.Admin
         private const string Success = "Delete success!!!";
         private readonly ICategoryService _categoryService;
         private readonly ITypeService _typeService;
-        public static Dictionary dictionary = new Dictionary();
+        public static Dictionary _dictionary = new Dictionary();
         private readonly IDictionaryService _dictionaryService;
-        private readonly ICategoryService _categoryService;
-        private readonly ITypeService _typeService;
         private readonly List<SearchBox> _listSearchBox;
 
         public MainForm(ICategoryService categoryService, ITypeService typeService, IDictionaryService dictionaryService)
@@ -28,8 +26,6 @@ namespace Translator.Admin
             _categoryService = categoryService;
             _typeService = typeService;
             _dictionaryService = dictionaryService;
-            _categoryService = categoryService;
-            _typeService = typeService;
             InitializeComponent();
             _listSearchBox = new List<SearchBox>
             {
@@ -77,17 +73,7 @@ namespace Translator.Admin
                 }
 
                 MessageBox.Show(Success);
-                GridData.DataSource = _dictionaryService.GetAll().Select(x => new
-                {
-                    x.Id,
-                    VN = x.Vn,
-                    VNLength = x.VnLength,
-                    JP = x.Jp,
-                    JPLength = x.JpLength,
-                    x.TypeId,
-                    x.DictionaryTypeId,
-                    x.Date,
-                }).ToList();
+                RefreshData();
             }
         }
 
@@ -103,6 +89,11 @@ namespace Translator.Admin
                 else
                     row.Selected = false;
             }
+        }
+
+        public void RefreshData()
+        {
+            btn_search_Click(null, null);
         }
 
         private void btn_search_Click(object sender, EventArgs e)
@@ -123,7 +114,7 @@ namespace Translator.Admin
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(predicate) || !parameterList.Any())
+            if (!string.IsNullOrWhiteSpace(predicate) && parameterList.Any())
             {
                 var parameterArray = parameterList.ToArray<object>();
                 IEnumerable<Dictionary> query = _dictionaryService.GetAll().ToList().Where(predicate, parameterArray);
@@ -139,11 +130,25 @@ namespace Translator.Admin
                     x.Date,
                 }).ToList();
             }
+            else
+            {
+                GridData.DataSource = _dictionaryService.GetAll().Select(x => new
+                {
+                    x.Id,
+                    VN = x.Vn,
+                    VNLength = x.VnLength,
+                    JP = x.Jp,
+                    JPLength = x.JpLength,
+                    x.TypeId,
+                    x.DictionaryTypeId,
+                    x.Date,
+                }).ToList();
+            }
             
         }
         private void btn_add_new_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, new Dictionary());
+            EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, new Dictionary(), this);
             editForm.Show();
         }
 
@@ -152,7 +157,7 @@ namespace Translator.Admin
             var rowIndex = GridData.CurrentRow.Index;
             var Id = GridData.Rows[rowIndex].Cells[1].Value;
             _dictionary = _dictionaryService.GetByKey((int)Id);
-            EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, _dictionary);
+            EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, _dictionary, this);
             editForm.Show();
         }
     }

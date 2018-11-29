@@ -14,12 +14,14 @@ namespace Translator.Admin
         private readonly ICategoryService _categoryService;
         private readonly ITypeService _typeService;
         private readonly Dictionary _dictionary;
-        public EditForm(ICategoryService categoryService, ITypeService typeService, IDictionaryService dictionaryService, Dictionary dictionary)
+        private readonly MainForm _parent;
+        public EditForm(ICategoryService categoryService, ITypeService typeService, IDictionaryService dictionaryService, Dictionary dictionary, MainForm parent)
         {
             _categoryService = categoryService;
             _typeService = typeService;
             _dictionary = dictionary;
             _dictionaryService = dictionaryService;
+            _parent = parent;
             InitializeComponent();
         }
         public bool check() {
@@ -86,7 +88,7 @@ namespace Translator.Admin
         {
             if (check())
             {
-                if (!string.IsNullOrWhiteSpace(txt_id.Text) || txt_id.Text != "0")
+                if (!string.IsNullOrWhiteSpace(txt_id.Text) && txt_id.Text != "0")
                 {
                     //dictionary.Id = int.Parse(txt_id.Text);
                     _dictionary.Jp = txt_jp.Text;
@@ -114,6 +116,7 @@ namespace Translator.Admin
                     };
                     _dictionaryService.AddNew(dictionary);
                 }
+                _parent.RefreshData();
                 this.Close();
             }
             

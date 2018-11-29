@@ -47,7 +47,7 @@ namespace Translator.Client
             OpenFileDialog result = new OpenFileDialog {Filter = V};
             if (result.ShowDialog() == DialogResult.OK)
             {
-                txt_FilePath.Text = openFileDialog1.FileName;
+                txt_FilePath.Text = result.FileName;
             }
         }
 
@@ -94,12 +94,32 @@ namespace Translator.Client
                 this.backgroundWorker1.ReportProgress(10, "Running");
                 if (path.IndexOf(".txt", StringComparison.Ordinal) != -1)
                 {
-                    string newPath = path.Replace(".xlsx", "_JP.xlsx");
+                    string newPath = string.Empty;
+                    switch (type)
+                    {
+                        case TranslateType.Jp2Vn:
+                            newPath = path.Replace(".txt", "_VN.txt");
+                            break;
+                        case TranslateType.Vn2Jp:
+                            newPath = path.Replace(".txt", "_JP.txt");
+                            break;
+
+                    }
                     _txtService.Translate(path, newPath, type);
                 }
                 else if (path.IndexOf(".xlsx", StringComparison.Ordinal) != -1)
                 {
-                    string newPath = path.Replace(".xlsx", "_JP.xlsx");
+                    string newPath = string.Empty;
+                    switch (type)
+                    {
+                        case TranslateType.Jp2Vn:
+                            newPath = path.Replace(".xlsx", "_VN.xlsx");
+                            break;
+                        case TranslateType.Vn2Jp:
+                            newPath = path.Replace(".xlsx", "_JP.xlsx");
+                            break;
+
+                    }
                     _excelService.Translate(path, newPath, type);
                 }
                 this.backgroundWorker1.ReportProgress(50, "Loading");
@@ -119,12 +139,32 @@ namespace Translator.Client
             this.backgroundWorker1.ReportProgress(50, "Loading");
             foreach (var file in excelFiles)
             {
-                string newPath = file.Replace(".xlsx", "_JP.xlsx");
+                string newPath = string.Empty;
+                switch (type)
+                {
+                    case TranslateType.Jp2Vn:
+                        newPath = file.Replace(".xlsx", "_VN.xlsx");
+                        break;
+                    case TranslateType.Vn2Jp:
+                        newPath = file.Replace(".xlsx", "_JP.xlsx");
+                        break;
+
+                }
                 _excelService.Translate(file, newPath, type);
             }
             foreach (var file in txtFiles)
             {
-                string newPath = file.Replace(".txt", "_JP.txt");
+                string newPath = string.Empty;
+                switch (type)
+                {
+                    case TranslateType.Jp2Vn:
+                        newPath = file.Replace(".txt", "_VN.txt");
+                        break;
+                    case TranslateType.Vn2Jp:
+                        newPath = file.Replace(".txt", "_JP.txt");
+                        break;
+
+                }
                 _txtService.Translate(file, newPath, type);
             }
             this.backgroundWorker1.ReportProgress(100, "Completed");
