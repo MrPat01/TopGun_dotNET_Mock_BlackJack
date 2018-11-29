@@ -8,7 +8,7 @@ namespace Translator.Core
     {
         protected override void Seed(TranslatorContext context)
         {
-            var sampleDataFolder = new DirectoryInfo(Directory.GetCurrentDirectory())?.Parent?.Parent?.Parent?.FullName +
+            var sampleDataFolder = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent?.Parent?.Parent?.FullName +
                                    @"\Translator.Core\Data\";
 
             var categoriesFile = sampleDataFolder + "Categories.sql";

@@ -31,17 +31,20 @@ namespace Translator.Core
 
         public T Delete(int key)
         {
-            var entity = _dbContext.Set<T>().Where(x => x.Id == key).FirstOrDefault();
-            entity.DeletedAt = DateTime.Now;
-            entity.IsDeleted = true;
-            _dbContext.Entry<T>(entity).State = EntityState.Modified;
-            _dbContext.SaveChanges();
+            var entity = _dbContext.Set<T>().FirstOrDefault(x => x.Id == key);
+            if (entity != null)
+            {
+                entity.DeletedAt = DateTime.Now;
+                entity.IsDeleted = true;
+                _dbContext.Entry(entity).State = EntityState.Modified;
+                _dbContext.SaveChanges();
+            }
             return entity;
         }
 
         public T GetByKey(int id)
         {
-            return _dbContext.Set<T>().Where(x => x.Id == id).FirstOrDefault();
+            return _dbContext.Set<T>().FirstOrDefault(x => x.Id == id);
         }
 
         public DbContext GetDbContext()

@@ -9,6 +9,7 @@ namespace Translator.Admin
 {
     public partial class EditForm : Form
     {
+        private const string Zero = "0";
         private readonly IDictionaryService _dictionaryService;
         private readonly ICategoryService _categoryService;
         private readonly ITypeService _typeService;
@@ -24,7 +25,7 @@ namespace Translator.Admin
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txt_id.Text) || txt_id.Text != "0")
+            if (!string.IsNullOrWhiteSpace(txt_id.Text) || txt_id.Text != Zero)
             {
                 //dictionary.Id = int.Parse(txt_id.Text);
                 _dictionary.Jp = txt_jp.Text;
@@ -52,7 +53,7 @@ namespace Translator.Admin
                 };
                 _dictionaryService.AddNew(dictionary);
             }
-            this.Close();
+            Close();
         }
 
         private void EditForm_Load(object sender, EventArgs e)

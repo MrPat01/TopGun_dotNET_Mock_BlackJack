@@ -7,7 +7,7 @@ namespace Translator.Core.Services
 {
     public class FieldService : IFieldService
     {
-        private IRepository<Field> _repository;
+        private readonly IRepository<Field> _repository;
         public FieldService(IRepository<Field> repository)
         {
             _repository = repository;

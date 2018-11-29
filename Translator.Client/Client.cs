@@ -47,8 +47,7 @@ namespace Translator.Client
 
         private void btn_BrowseFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog result = new OpenFileDialog();
-            result.Filter = V;
+            OpenFileDialog result = new OpenFileDialog {Filter = V};
             if (result.ShowDialog() == DialogResult.OK)
             {
                 txt_FilePath.Text = result.FileName;

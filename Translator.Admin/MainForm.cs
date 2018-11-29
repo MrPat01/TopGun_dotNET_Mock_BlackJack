@@ -15,7 +15,7 @@ namespace Translator.Admin
         private const string DeleteMessage = "Confirm delete!!!";
         private static string ConfirmMessage = "Do you want to delete?";
         private const string Success = "Delete success!!!";
-        public static Dictionary dictionary = new Dictionary();
+        private static Dictionary _dictionary = new Dictionary();
         private readonly IDictionaryService _dictionaryService;
         private readonly ICategoryService _categoryService;
         private readonly ITypeService _typeService;
@@ -119,18 +119,23 @@ namespace Translator.Admin
                 }
             }
 
-            var query = _dictionaryService.GetAll().ToList().Where(predicate, parameterList.ToArray());
-            GridData.DataSource = query.Select(x => new
+            if (string.IsNullOrWhiteSpace(predicate) || !parameterList.Any())
             {
-                x.Id,
-                x.Vn,
-                x.VnLength,
-                x.Jp,
-                x.JpLength,
-                x.TypeId,
-                x.DictionaryTypeId,
-                x.Date,
-            }).ToList();
+                var parameterArray = parameterList.ToArray<object>();
+                IEnumerable<Dictionary> query = _dictionaryService.GetAll().ToList().Where(predicate, parameterArray);
+                GridData.DataSource = query.Select(x => new
+                {
+                    x.Id,
+                    x.Vn,
+                    x.VnLength,
+                    x.Jp,
+                    x.JpLength,
+                    x.TypeId,
+                    x.DictionaryTypeId,
+                    x.Date,
+                }).ToList();
+            }
+            
         }
         private void btn_add_new_Click(object sender, EventArgs e)
         {
@@ -141,8 +146,8 @@ namespace Translator.Admin
         private void GridData_DoubleClick(object sender, EventArgs e)
         {
             var cell = GridData.CurrentCell.Value;
-            dictionary = _dictionaryService.GetByKey((int)cell);
-            EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, dictionary);
+            _dictionary = _dictionaryService.GetByKey((int)cell);
+            EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, _dictionary);
             editForm.Show();
         }
     }

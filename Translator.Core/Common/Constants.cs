@@ -4,7 +4,6 @@ namespace Translator.Core.Common
 {
     public class Constants
     {
-        public static readonly string FileAppendJp2Vn = "_japanese";
         public static readonly int RefreshTime = 1 * 10 * 1000; // 1 min
 
         public static readonly Dictionary<EnumType, List<string>> Operations = new Dictionary<EnumType, List<string>>()

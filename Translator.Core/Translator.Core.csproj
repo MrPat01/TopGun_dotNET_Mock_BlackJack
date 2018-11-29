@@ -57,7 +57,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
-    <Compile Include="Filter\DictionaryFilter.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="IServices\ICategoryService.cs" />
@@ -101,6 +100,8 @@
     <Content Include="Data\TranslateFails.sql" />
     <Content Include="Data\Types.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Filter\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

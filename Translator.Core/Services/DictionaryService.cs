@@ -1,43 +1,43 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Translator.Core.Common;
-using Translator.Core.Filter;
 using Translator.Core.Models;
 
 namespace Translator.Core.Services
 {
     public class DictionaryService : Repository<Dictionary>, IServices.IDictionaryService
     {
-        IServices.ITranslateFailService _ITranslateFailService;
+        private readonly IServices.ITranslateFailService _iTranslateFailService;
         public DictionaryService(TranslatorContext dbContext, IServices.ITranslateFailService translateFailService) : base(dbContext)
         {
-            _ITranslateFailService = translateFailService;
+            _iTranslateFailService = translateFailService;
         }
-        public Dictionary Muti_Condition(List<DictionaryFilter> filter)
+/*
+        public Dictionary Multiple_Condition(List<DictionaryFilter> filter)
         {
             var query = GetAll();
             var model = query.FirstOrDefault();
             return model;
         }
+*/
         public Dictionary TranslateVn2Jp(string input)
         {
-            var model = GetAll().Where(x => x.Vn == input).FirstOrDefault();
+            var model = GetAll().FirstOrDefault(x => x.Vn == input);
             if (model != null)
                 return model;
             else
             {
-                _ITranslateFailService.AddNew(new TranslateFail { Text = input, TypeId = TranslateType.Vn2Jp });
+                _iTranslateFailService.AddNew(new TranslateFail { Text = input, TypeId = TranslateType.Vn2Jp });
                 return new Dictionary();
             }
         }
         public Dictionary TranslateJp2Vn(string input)
         {
-            var model = GetAll().Where(x => x.Jp == input).FirstOrDefault();
+            var model = GetAll().FirstOrDefault(x => x.Jp == input);
             if (model != null)
                 return model;
             else
             {
-                _ITranslateFailService.AddNew(new TranslateFail { Text = input, TypeId = TranslateType.Jp2Vn });
+                _iTranslateFailService.AddNew(new TranslateFail { Text = input, TypeId = TranslateType.Jp2Vn });
                 return new Dictionary();
             }
         }

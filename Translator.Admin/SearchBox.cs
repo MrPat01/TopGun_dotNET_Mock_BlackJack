@@ -123,14 +123,7 @@ namespace Translator.Admin
 
         private void SearchBox_Load(object sender, EventArgs e)
         {
-            if (EnableAndOrCombobox)
-            {
-                cbProperty.Enabled = false;
-            }
-            else
-            {
-                cbProperty.Enabled = true;
-            }
+            cbProperty.Enabled = !EnableAndOrCombobox;
         }
     }
 }

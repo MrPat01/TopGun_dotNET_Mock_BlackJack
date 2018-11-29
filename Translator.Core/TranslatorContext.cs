@@ -8,8 +8,8 @@ namespace Translator.Core
         public TranslatorContext()
             : base("name=TranslatorContext")
         {
-            Database.SetInitializer<TranslatorContext>(new TranslatorInitializer());
-            this.Database.CommandTimeout = 600;
+            Database.SetInitializer(new TranslatorInitializer());
+            Database.CommandTimeout = 600;
         }
 
         public virtual DbSet<ConfigPath> ConfigPath { get; set; }

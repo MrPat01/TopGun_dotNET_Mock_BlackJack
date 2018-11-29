@@ -11,10 +11,12 @@ namespace Translator.Server
 
     public partial class Server : Form
     {
+        private const string StopString = "Stop";
+        private const string RunString = "Run";
         private readonly IExcelService _excelService;
         private readonly ITxtService _txtService;
         private readonly IConfigPathService _configPathService;
-        Timer myTimer = new Timer();
+        readonly Timer _myTimer = new Timer();
         public Server(IConfigPathService configPathService, IExcelService excelService, ITxtService txtService)
         {
             _configPathService = configPathService;
@@ -242,16 +244,16 @@ namespace Translator.Server
             var text = btn_Run.Text;
             if (text == "Run")
             {
-                btn_Run.Text = "Stop";
+                btn_Run.Text = StopString;
                 AutoTranslate();
-                myTimer.Interval = Constants.RefreshTime;
-                myTimer.Tick += MyTimer_Tick;
-                myTimer.Start();
+                _myTimer.Interval = Constants.RefreshTime;
+                _myTimer.Tick += MyTimer_Tick;
+                _myTimer.Start();
             }
             else
             {
-                btn_Run.Text = "Run";
-                myTimer.Stop();
+                btn_Run.Text = RunString;
+                _myTimer.Stop();
             }
         }
 
