@@ -237,6 +237,10 @@
             this.GridData.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GridData_CellValueChanged);
             this.GridData.DoubleClick += new System.EventHandler(this.GridData_DoubleClick);
             // 
+            // check
+            // 
+            this.check.Name = "check";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -248,6 +252,7 @@
             this.Controls.Add(this.btn_add_new);
             this.Controls.Add(this.btn_delete_data);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             MainForm._confirmMessage = "MainForm";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);

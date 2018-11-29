@@ -15,12 +15,16 @@ namespace Translator.Admin
         private const string DeleteMessage = "Confirm delete!!!";
         private static string _confirmMessage = "Do you want to delete?";
         private const string Success = "Delete success!!!";
+        private readonly ICategoryService _categoryService;
+        private readonly ITypeService _typeService;
         public static Dictionary dictionary = new Dictionary();
         private readonly IDictionaryService _dictionaryService;
         private readonly List<SearchBox> _listSearchBox;
 
-        public MainForm(IDictionaryService dictionaryService)
+        public MainForm(ICategoryService categoryService, ITypeService typeService, IDictionaryService dictionaryService)
         {
+            _categoryService = categoryService;
+            _typeService = typeService;
             _dictionaryService = dictionaryService;
             InitializeComponent();
             _listSearchBox = new List<SearchBox>
@@ -130,7 +134,7 @@ namespace Translator.Admin
         }
         private void btn_add_new_Click(object sender, EventArgs e)
         {
-            EditForm editForm = new EditForm(_dictionaryService, new Dictionary());
+            EditForm editForm = new EditForm(_categoryService, _typeService,_dictionaryService, new Dictionary());
             editForm.Show();
         }
 
@@ -138,7 +142,7 @@ namespace Translator.Admin
         {
             var cell = GridData.CurrentCell.Value;
             dictionary = _dictionaryService.GetByKey((int)cell);
-            EditForm editForm = new EditForm(_dictionaryService, dictionary);
+            EditForm editForm = new EditForm(_categoryService, _typeService, _dictionaryService, dictionary);
             editForm.Show();
         }
     }
