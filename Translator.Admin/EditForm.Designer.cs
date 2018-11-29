@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.labelInputer = new System.Windows.Forms.Label();
+            this.labelDateType = new System.Windows.Forms.Label();
+            this.labelTranslateType = new System.Windows.Forms.Label();
+            this.labelPriority = new System.Windows.Forms.Label();
+            this.labelCate = new System.Windows.Forms.Label();
+            this.labelVn = new System.Windows.Forms.Label();
+            this.labelJp = new System.Windows.Forms.Label();
             this.txt_inputer = new System.Windows.Forms.TextBox();
             this.txt_priority = new System.Windows.Forms.TextBox();
             this.cbb_data_type = new System.Windows.Forms.ComboBox();
@@ -52,6 +59,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.labelInputer);
+            this.groupBox1.Controls.Add(this.labelDateType);
+            this.groupBox1.Controls.Add(this.labelTranslateType);
+            this.groupBox1.Controls.Add(this.labelPriority);
+            this.groupBox1.Controls.Add(this.labelCate);
+            this.groupBox1.Controls.Add(this.labelVn);
+            this.groupBox1.Controls.Add(this.labelJp);
             this.groupBox1.Controls.Add(this.txt_inputer);
             this.groupBox1.Controls.Add(this.txt_priority);
             this.groupBox1.Controls.Add(this.cbb_data_type);
@@ -74,6 +88,84 @@
             this.groupBox1.TabIndex = 38;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit Area";
+            // 
+            // labelInputer
+            // 
+            this.labelInputer.AutoSize = true;
+            this.labelInputer.ForeColor = System.Drawing.Color.Red;
+            this.labelInputer.Location = new System.Drawing.Point(391, 414);
+            this.labelInputer.Name = "labelInputer";
+            this.labelInputer.Size = new System.Drawing.Size(101, 13);
+            this.labelInputer.TabIndex = 62;
+            this.labelInputer.Text = "Please input Inputer";
+            this.labelInputer.Visible = false;
+            // 
+            // labelDateType
+            // 
+            this.labelDateType.AutoSize = true;
+            this.labelDateType.ForeColor = System.Drawing.Color.Red;
+            this.labelDateType.Location = new System.Drawing.Point(391, 371);
+            this.labelDateType.Name = "labelDateType";
+            this.labelDateType.Size = new System.Drawing.Size(118, 13);
+            this.labelDateType.TabIndex = 61;
+            this.labelDateType.Text = "Please input Data Type";
+            this.labelDateType.Visible = false;
+            // 
+            // labelTranslateType
+            // 
+            this.labelTranslateType.AutoSize = true;
+            this.labelTranslateType.ForeColor = System.Drawing.Color.Red;
+            this.labelTranslateType.Location = new System.Drawing.Point(391, 327);
+            this.labelTranslateType.Name = "labelTranslateType";
+            this.labelTranslateType.Size = new System.Drawing.Size(139, 13);
+            this.labelTranslateType.TabIndex = 60;
+            this.labelTranslateType.Text = "Please input Translate Type";
+            this.labelTranslateType.Visible = false;
+            // 
+            // labelPriority
+            // 
+            this.labelPriority.AutoSize = true;
+            this.labelPriority.ForeColor = System.Drawing.Color.Red;
+            this.labelPriority.Location = new System.Drawing.Point(391, 283);
+            this.labelPriority.Name = "labelPriority";
+            this.labelPriority.Size = new System.Drawing.Size(99, 13);
+            this.labelPriority.TabIndex = 59;
+            this.labelPriority.Text = "Please input Priority";
+            this.labelPriority.Visible = false;
+            // 
+            // labelCate
+            // 
+            this.labelCate.AutoSize = true;
+            this.labelCate.ForeColor = System.Drawing.Color.Red;
+            this.labelCate.Location = new System.Drawing.Point(391, 252);
+            this.labelCate.Name = "labelCate";
+            this.labelCate.Size = new System.Drawing.Size(110, 13);
+            this.labelCate.TabIndex = 58;
+            this.labelCate.Text = "Please input Category";
+            this.labelCate.Visible = false;
+            // 
+            // labelVn
+            // 
+            this.labelVn.AutoSize = true;
+            this.labelVn.ForeColor = System.Drawing.Color.Red;
+            this.labelVn.Location = new System.Drawing.Point(106, 229);
+            this.labelVn.Name = "labelVn";
+            this.labelVn.Size = new System.Drawing.Size(81, 13);
+            this.labelVn.TabIndex = 57;
+            this.labelVn.Text = "Please input Vn";
+            this.labelVn.Visible = false;
+            this.labelVn.Click += new System.EventHandler(this.label10_Click);
+            // 
+            // labelJp
+            // 
+            this.labelJp.AutoSize = true;
+            this.labelJp.ForeColor = System.Drawing.Color.Red;
+            this.labelJp.Location = new System.Drawing.Point(106, 140);
+            this.labelJp.Name = "labelJp";
+            this.labelJp.Size = new System.Drawing.Size(79, 13);
+            this.labelJp.TabIndex = 56;
+            this.labelJp.Text = "Please input Jp";
+            this.labelJp.Visible = false;
             // 
             // txt_inputer
             // 
@@ -115,7 +207,7 @@
             // 
             // txt_vn
             // 
-            this.txt_vn.Location = new System.Drawing.Point(109, 169);
+            this.txt_vn.Location = new System.Drawing.Point(109, 156);
             this.txt_vn.Name = "txt_vn";
             this.txt_vn.Size = new System.Drawing.Size(531, 70);
             this.txt_vn.TabIndex = 50;
@@ -265,5 +357,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.Button btn_clear_data;
+        private System.Windows.Forms.Label labelVn;
+        private System.Windows.Forms.Label labelJp;
+        private System.Windows.Forms.Label labelInputer;
+        private System.Windows.Forms.Label labelDateType;
+        private System.Windows.Forms.Label labelTranslateType;
+        private System.Windows.Forms.Label labelPriority;
+        private System.Windows.Forms.Label labelCate;
     }
 }
