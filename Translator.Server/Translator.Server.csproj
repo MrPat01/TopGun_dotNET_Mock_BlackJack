@@ -75,6 +75,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -95,6 +96,18 @@
       <Project>{8e5f9488-d4c3-47b0-b241-5a57acaf6650}</Project>
       <Name>Translator.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\46950763_2268882083131675_3153659962782121984_n.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\47062141_2442933359274255_2161239968687587328_n.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\47111751_359602294789368_4643120531879493632_n.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\47225220_2238312743124879_8960527073496006656_n.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
