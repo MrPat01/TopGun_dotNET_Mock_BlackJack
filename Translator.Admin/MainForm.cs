@@ -108,6 +108,10 @@ namespace Translator.Admin
                 var andOr = searchBox.GetAndOr();
                 if (expression != null)
                 {
+                    if (parameterIndex == 0 && !string.IsNullOrWhiteSpace(andOr))
+                    {
+                        andOr = String.Empty;
+                    }
                     predicate += andOr + $"@{parameterIndex}(it)";
                     parameterList.Add(expression);
                     parameterIndex++;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -135,18 +136,18 @@ namespace Translator.Server
             string folderVnOutPut = txt_VN_Output.Text;
             string folderVnInPut = txt_VN_Input.Text;
             //check folder exist
-            if (!File.Exists(folderVnOutPut))
+            if (!Directory.Exists(folderVnOutPut))
             {
                 Directory.CreateDirectory(folderVnOutPut);
             }
-            if (!File.Exists(folderVnInPut))
+            if (!Directory.Exists(folderVnInPut))
             {
                 Directory.CreateDirectory(folderVnInPut);
             }
             //get file name order by ASC
-            var fileInFolderVnOutPut = Directory.EnumerateFiles(folderVnOutPut, "*.txt; *.xlsx;").ToList();
-            var fileInFolderVnInPut = Directory.EnumerateFiles(folderVnInPut, "*.txt; *.xlsx;").ToList();
-            var filesInputTemp = Directory.EnumerateFiles(folderVnInPut, "*.txt; *.xlsx;").ToList();
+            var fileInFolderVnOutPut = Directory.GetFiles(folderVnOutPut).Where(f => f.EndsWith(".xlsx") || f.EndsWith(".txt")).ToList();
+            var fileInFolderVnInPut = Directory.GetFiles(folderVnInPut).Where(f => f.EndsWith(".xlsx") || f.EndsWith(".txt")).ToList();
+            var filesInputTemp = Directory.GetFiles(folderVnInPut).Where(f => f.EndsWith(".xlsx") || f.EndsWith(".txt")).ToList();
 
             //remove file has been translated
             foreach (var item in fileInFolderVnInPut)
@@ -166,18 +167,18 @@ namespace Translator.Server
             string folderJPOutPut = txt_JP_Output.Text;
             string folderJPInPut = txt_JP_Input.Text;
             //check folder exist
-            if (!File.Exists(folderJPOutPut))
+            if (!Directory.Exists(folderJPOutPut))
             {
                 Directory.CreateDirectory(folderJPOutPut);
             }
-            if (!File.Exists(folderJPInPut))
+            if (!Directory.Exists(folderJPInPut))
             {
                 Directory.CreateDirectory(folderJPInPut);
             }
             //get file name order by ASC
-            var fileInFolderVnOutPut = Directory.EnumerateFiles(folderJPOutPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
-            var fileInFolderVnInPut = Directory.EnumerateFiles(folderJPInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
-            var filesInputTemp = Directory.EnumerateFiles(folderJPInPut, "*.txt; *.xlsx;").OrderBy(x => x).ToList();
+            var fileInFolderVnOutPut = Directory.GetFiles(folderJPOutPut).Where(f => f.EndsWith(".xlsx") || f.EndsWith(".txt")).ToList();
+            var fileInFolderVnInPut = Directory.GetFiles(folderJPInPut).Where(f => f.EndsWith(".xlsx") || f.EndsWith(".txt")).ToList();
+            var filesInputTemp = Directory.GetFiles(folderJPInPut).Where(f => f.EndsWith(".xlsx") || f.EndsWith(".txt")).ToList();
 
             //remove file has been translated
             foreach (var item in fileInFolderVnInPut)
@@ -307,7 +308,7 @@ namespace Translator.Server
         private void btn_Run_Click(object sender, EventArgs e)
         {
             var text = btn_Run.Text;
-            if (text == "Run")
+            if (text.Equals(RunString))
             {
                 btn_Run.Text = StopString;
                 AutoTranslate();
@@ -325,41 +326,6 @@ namespace Translator.Server
         private void MyTimer_Tick(object sender, EventArgs e)
         {
             AutoTranslate();
-        }
-
-        private void btn_JP2VN_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_VN2JP_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_translateFolder_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_translateFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_BrowseFolder_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_BrowseFile_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
